@@ -29,35 +29,18 @@ const login = async (req, res) => {
 
     if (user.erro == null) {
         var result = user
-
         jwt.sign(result, process.env.KEY, { expiresIn: '10h' }, function (err, token) {
 
             console.log(err)
             if (err == null) {
                 console.log(result)
                 result["token"] = token
-                res.status(200).json({result}).end()
+                res.status(200).json({ result }).end()
             } else {
                 res.status(404).json(err).end()
             }
         })
     }
-    // res.status(202).json(user).end()
-
-
-
-
-    // console.log(result)
-
-    // jwt.sign((result[0]), process.env.KEY, { expiresIn: '10h' }, function (err, token) {
-    //     if (err == null) {
-
-    //         result[0]["token"] = token
-    //         res.status(202).json(result[0]).end()
-    //     } else {
-    //         res.status(404).json(err).end()
-    //     }
-    // })
 }
 
 

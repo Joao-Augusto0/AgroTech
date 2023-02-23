@@ -28,11 +28,20 @@ const read = async (req, res) => {
                     data_fim:true,
                     valor:true,
                     descricao:true
-
                 }
             }
         }
     })
+
+    veiculo.forEach(element => {
+        if(element.Manutencao.length == 0){
+            element.Manutencao = "não esta sendo feita nenhuma manutenção"
+        }
+        if(element.Servico.length == 0){
+            element.Servico = "não esta fazendo nenhum serviço"
+        }
+    });
+
     res.status(200).json(veiculo).end()
 }
 
