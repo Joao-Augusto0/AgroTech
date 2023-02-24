@@ -25,9 +25,11 @@ const login = async (req, res) => {
             ]
         }
 
+    }).catch(err => {
+        console.log(err)
     })
 
-    if (user.erro == null) {
+    if (user) {
         var result = user
         jwt.sign(result, process.env.KEY, { expiresIn: '10h' }, function (err, token) {
 
@@ -40,6 +42,8 @@ const login = async (req, res) => {
                 res.status(404).json(err).end()
             }
         })
+    }else{
+        res.status(404).json({"mensagem":"usuario não encontrado"}).end()
     }
 }
 

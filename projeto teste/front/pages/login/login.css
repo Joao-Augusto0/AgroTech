@@ -1,0 +1,102 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    overflow-y:hidden;
+}
+
+.container {
+    height: 100vh;
+    width: 100vw;
+    background-image: url('https://mundogeo.com/wp-content/uploads/2017/04/agronegocio.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    
+}
+
+.agro {
+    margin: auto;
+    background-image: url('https://www.digitizeme.blog/hubfs/Texto%205%20-%20IoT.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    height: 700px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.head {
+    height: 40%;
+}
+
+.logo {
+    height: 200px;
+    width: 200px;
+}
+
+.formulario {
+    height: 280px;
+    width: 280px;
+    box-shadow: 5px 10px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top:40px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+.form2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top:10px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.form1 img {
+    height: 30px;
+    margin: 5px;
+}
+.form2 img {
+    height: 30px;
+    margin: 5px;
+}
+
+.form1 .form2 label,input {
+    width: 180px;
+    height: 30px;
+    margin:5px;
+}
+
+input {
+    background:transparent;
+    border: none;
+    outline: none;
+}
+
+.btn {
+    height: 40px;
+    width: 150px;
+    margin-top:30%;
+    cursor: pointer;
+    background-color:white;
+    border: none;
+    transition: all 0.5s;
+    border-radius: 10px;
+}
+
+.btn:hover{
+    background-color: rgb(85, 201, 162);
+}
