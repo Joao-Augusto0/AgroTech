@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config()
+const bcrypt = require('bcrypt')
 
 const { PrismaClient } = require('@prisma/client')
 
@@ -8,10 +9,26 @@ const prisma = new PrismaClient()
 // criação de usuario para teste
 
 const create = async (req, res) => {
+    var info = req.body
+
+    //criptografando senha
+    info.senha = await bcrypt.hash(req.body.senha, 10)
+
     let user = await prisma.usuario.create({
-        data: req.body
+        data: info
     })
-    res.status(201).end()
+W
+    res.status(201).json(user).end()
+}
+
+const read = async (req, res) => {
+    let user = await prisma.usuario.findMany({
+        select: {
+            email: true,
+            senha: true
+        }
+    })
+    res.status(201).json(user).end()
 }
 
 // login de usuario
@@ -33,7 +50,6 @@ const login = async (req, res) => {
         var result = user
         jwt.sign(result, process.env.KEY, { expiresIn: '10h' }, function (err, token) {
 
-            console.log(err)
             if (err == null) {
                 console.log(result)
                 result["token"] = token
@@ -42,8 +58,8 @@ const login = async (req, res) => {
                 res.status(404).json(err).end()
             }
         })
-    }else{
-        res.status(404).json({"mensagem":"usuario não encontrado"}).end()
+    } else {
+        res.status(404).json({ "mensagem": "usuario não encontrado" }).end()
     }
 }
 
@@ -52,5 +68,6 @@ const login = async (req, res) => {
 
 module.exports = {
     create,
-    login
+    login,
+    read
 }

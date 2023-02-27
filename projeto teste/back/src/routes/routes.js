@@ -7,6 +7,7 @@ const middleware = require('../middleware/middleware')
 
 router.post('/createUser',users.create)
 router.post('/loginUser',users.login)
+router.get('/listaUsers',users.read)
 
 const motorista = require('../controllers/controllerMotorista')
 
