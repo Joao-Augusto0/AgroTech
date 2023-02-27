@@ -6,7 +6,6 @@ function login() {
     let dados = {
         email: inpEmail,
         senha: inpSenha
-
     }
 
     const options = {
@@ -16,14 +15,16 @@ function login() {
     };
 
     fetch('http://localhost:3000/loginUser', options)
-        .then(response => { return response.json() })
-        .then(resp => {
-            console.log(resp)
-            if (resp.result.length != 0) {
-                if (resp.result.email === dados.email && resp.result.senha === dados.senha) {
-                    window.location.href = "../home/index.html"
-                }
+        .then(response => {
+            if (response.status === 200) {
+                window.location.href = "../home/index.html"
+            } else if (response.status === 404) {
+                document.getElementById("error-message").style.display = "block"
             }
         })
+        .then(resp => console.log(resp))
 }
 
+document.getElementById("btn").addEventListener("click", function (event) {
+    event.preventDefault()
+})
