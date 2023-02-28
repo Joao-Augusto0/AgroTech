@@ -17,7 +17,7 @@ const create = async (req, res) => {
     let user = await prisma.usuario.create({
         data: info
     })
-W
+    W
     res.status(201).json(user).end()
 }
 
@@ -34,19 +34,22 @@ const read = async (req, res) => {
 // login de usuario
 
 const login = async (req, res) => {
-    const user = await prisma.usuario.findFirst({
-        where: {
-            AND: [
-                { email: req.body.email },
-                { senha: req.body.senha }
-            ]
-        }
+    const user = await prisma.usuario.findMany({
+
 
     }).catch(err => {
         console.log(err)
     })
 
     if (user) {
+
+        user.forEach(async u => {
+            let a = await bcrypt.compare(u.senha, req.body.senha)
+            console.log(a)
+        })
+
+
+
         var result = user
         jwt.sign(result, process.env.KEY, { expiresIn: '10h' }, function (err, token) {
 

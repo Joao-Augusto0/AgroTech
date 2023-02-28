@@ -1,0 +1,25 @@
+.gerencial {
+    text-align: center;
+}
+
+.gerencial>h2 {
+    margin-bottom:12px ;
+    margin-top:12px ;
+}
+
+.infoGen {
+    display: flex;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.op {
+    background-color: rgb(42, 138, 57);;
+}
+
+.infoGen:hover {
+    background-color: rgb(42, 138, 57);
+    cursor: pointer;
+    transition: 0.7s;
+}

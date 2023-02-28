@@ -1,0 +1,9 @@
+.moto {
+    background-color: rgb(42, 138, 57);;
+}
+
+.infoGen:hover {
+    background-color: rgb(42, 138, 57);
+    cursor: pointer;
+    transition: 0.7s;
+}
