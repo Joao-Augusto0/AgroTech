@@ -16,13 +16,16 @@ function login() {
 
     fetch('http://localhost:3000/loginUser', options)
         .then(response => {
-            if (response.status === 200) {
-                window.location.href = "../home/index.html"
-            } else if (response.status === 404) {
+            if (response.status == 404) {
                 document.getElementById("error-message").style.display = "block"
+            } if (response.status == 200) {
+                window.location.href = "../home/index.html"
             }
+            return response.json()
         })
-        .then(resp => console.log(resp))
+        .then(resp => {
+            localStorage.setItem('user', JSON.stringify({ "id": resp.result.id, "nome": resp.result.nome, "role": resp.result.role, "token": resp.result.token }));
+        })
 }
 
 document.getElementById("btn").addEventListener("click", function (event) {

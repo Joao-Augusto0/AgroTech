@@ -37,11 +37,9 @@ const read = async (req, res) => {
 const login = async (req, res) => {
 
     const user = await prisma.usuario.findFirst({
-
         where: { email: req.body.email }
 
     }).catch(err => {
-
         console.log(err)
     })
 
@@ -62,7 +60,7 @@ const login = async (req, res) => {
             })
         }
     } else {
-        res.status(404).json({ "mensagem": "usuario não encontrado" }).end()
+        res.status(404).json({ "result": "usuario não encontrado" }).end()
     }
 }
 
