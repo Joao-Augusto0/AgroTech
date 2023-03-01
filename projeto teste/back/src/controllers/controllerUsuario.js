@@ -17,10 +17,11 @@ const create = async (req, res) => {
     let user = await prisma.usuario.create({
         data: info
     })
-    W
+
     res.status(201).json(user).end()
 }
 
+// listar usuarios
 const read = async (req, res) => {
     let user = await prisma.usuario.findMany({
         select: {
@@ -34,33 +35,32 @@ const read = async (req, res) => {
 // login de usuario
 
 const login = async (req, res) => {
-    const user = await prisma.usuario.findMany({
 
+    const user = await prisma.usuario.findFirst({
+
+        where: { email: req.body.email }
 
     }).catch(err => {
+
         console.log(err)
     })
 
     if (user) {
+        //comparando a senha que o usuario digitou com a senha criptgrafada
+        if (await bcrypt.compare(req.body.senha, user.senha)) {
+            var result = user
 
-        user.forEach(async u => {
-            let a = await bcrypt.compare(u.senha, req.body.senha)
-            console.log(a)
-        })
+            jwt.sign(result, process.env.KEY, { expiresIn: '10h' }, function (err, token) {
 
-
-
-        var result = user
-        jwt.sign(result, process.env.KEY, { expiresIn: '10h' }, function (err, token) {
-
-            if (err == null) {
-                console.log(result)
-                result["token"] = token
-                res.status(200).json({ result }).end()
-            } else {
-                res.status(404).json(err).end()
-            }
-        })
+                if (err == null) {
+                    // adicionando um token quando o usuário logar
+                    result["token"] = token
+                    res.status(200).json({ result }).end()
+                } else {
+                    res.status(404).json(err).end()
+                }
+            })
+        }
     } else {
         res.status(404).json({ "mensagem": "usuario não encontrado" }).end()
     }
