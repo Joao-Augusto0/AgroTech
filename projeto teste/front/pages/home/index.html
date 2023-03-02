@@ -51,7 +51,7 @@
 
                 </div>
                 <div class="info-rel">
-                    <div class="info frota">
+                    <div class="info dispo">
                         <h2>disponibilidade</h2>
                         <img class="icons frota" src="https://cdn-icons-png.flaticon.com/512/4088/4088121.png" alt="">
                     </div>
@@ -60,7 +60,7 @@
                         <img class="icons manutencao" src="https://cdn-icons-png.flaticon.com/128/949/949946.png"
                             alt="">
                     </div>
-                    <div class="info operacao">
+                    <div class="info alocacao">
                         <h2>Alocação</h2>
                         <img class="icons operacao" src="https://cdn-icons-png.flaticon.com/512/4129/4129523.png"
                             alt="">
@@ -68,8 +68,82 @@
                 </div>
             </div>
         </div>
-
     </main>
+
+    <div id="modal-relatorio disponibilidade" class="modal-container">
+        <div class="modal">
+            <button class="fechar">x</button>
+            <h3> relatório de disponibilidade</h3>
+            <div class="ralati-dispo">
+                <div class="relatorio-dispo-moto">
+                    <table>
+                        <thead>
+                            <tr class="linha-moto">
+                                <th>id</th>
+                                <th>nome</th>
+                                <th>situação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="relatorio-dispo-veiculo">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>id_carro</th>
+                                <th>placa</th>
+                                <th>situação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-relatorio manuten" class="modal-container">
+        <div class="modal">
+            <button class="fechar">x</button>
+            <h3>relatório de manutenção</h3>
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>id_carro</th>
+                            <th>descricao</th>
+                            <th>valor</th>
+                            <th>data_inicio</th>
+                            <th>data_fim</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-relatorio aloca" class="modal-container">
+        <div class="modal">
+            <button class="fechar">x</button>
+            <h3>relatório de alocação</h3>
+        </div>
+    </div>
+
 </body>
 <script src="script.js"></script>
+
 </html>

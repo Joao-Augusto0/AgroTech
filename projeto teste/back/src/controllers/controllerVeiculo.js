@@ -14,7 +14,7 @@ const read = async (req, res) => {
         select: {
             id: true,
             modelo: true,
-            marca:true,
+            marca: true,
             Servico: {
                 select: {
                     data_saida: true,
@@ -23,21 +23,21 @@ const read = async (req, res) => {
                 }
             },
             Manutencao: {
-                select:{
-                    data_inicio:true,
-                    data_fim:true,
-                    valor:true,
-                    descricao:true
+                select: {
+                    data_inicio: true,
+                    data_fim: true,
+                    valor: true,
+                    descricao: true
                 }
             }
         }
     })
 
     veiculo.forEach(element => {
-        if(element.Manutencao.length == 0){
+        if (element.Manutencao.length == 0) {
             element.Manutencao = "não esta sendo feita nenhuma manutenção"
         }
-        if(element.Servico.length == 0){
+        if (element.Servico.length == 0) {
             element.Servico = "não esta fazendo nenhum serviço"
         }
     });
@@ -47,10 +47,10 @@ const read = async (req, res) => {
 
 const update = async (req, res) => {
     let veiculo = await prisma.frota.update({
-        where:{
+        where: {
             id: Number(req.params.id)
         },
-        data:req.body
+        data: req.body
     })
     res.status(200).json(veiculo).end()
 }

@@ -48,8 +48,8 @@ model Servico {
 
 model Manutencao {
   id          Int       @id @default(autoincrement())
-  descricao   String?
-  valor       Float?
+  descricao   String
+  valor       Float
   data_inicio DateTime? @default(now())
   data_fim    DateTime?
   id_veiculo Int
