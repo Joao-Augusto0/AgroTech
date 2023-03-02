@@ -15,6 +15,7 @@ const read = async (req, res) => {
             id: true,
             modelo: true,
             marca: true,
+            placa:true,
             Servico: {
                 select: {
                     data_saida: true,

@@ -17,24 +17,39 @@
             <div class="titulo">
                 <h1>AgroTech</h1>
             </div>
-            <div class="gerencial">
+            <nav class="gerencial">
                 <h2>gerencial</h2>
-                <a href="./index.html">
-                    <div class="infoGen home">Home</div>
-                </a>
-                <a href="../operacional/motorista/index.html">
-                    <div class="infoGen moto">Motoristas</div>
-                </a>
-                <a href="../operacional/frota/index.html">
-                    <div class="infoGen frot">Frota</div>
-                </a>
-                <a href="../operacional/operacoes/index.html">
-                    <div class="infoGen op">Operações</div>
-                </a>
-                <a href="../operacional/manutencao/index.html">
-                    <div class="infoGen manu">Manutenção</div>
-                </a>
-            </div>
+                <ul class="ul">
+                    <li>
+                        <a class="link" href="./index.html">
+                            <div class="infoGen home">Home</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="link" href="../operacional/motorista/index.html">
+                            <div class="infoGen moto">Motoristas</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="link" href="../operacional/frota/index.html">
+                            <div class="infoGen frot">Frota</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="link" href="../operacional/operacoes/index.html">
+                            <div class="infoGen ope">Operações</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="link" href="../operacional/manutencao/index.html">
+                            <div class="infoGen manu">Manutenção</div>
+                        </a>
+                    </li>
+                </ul>
+                <button class="btn">
+                    sair
+                </button>
+            </nav>
         </aside>
         <div class="dash">
             <header class="topo-main">
@@ -76,7 +91,7 @@
             <h3> relatório de disponibilidade</h3>
             <div class="ralati-dispo">
                 <div class="relatorio-dispo-moto">
-                    <table>
+                    <table class="table-motorista">
                         <thead>
                             <tr class="linha-moto">
                                 <th>id</th>
@@ -85,16 +100,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                            <tr class="itens-moto model">
+                                <td class="id_motorista"></td>
+                                <td class="nome_motorista"></td>
+                                <td class="situacao_motorista"></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="relatorio-dispo-veiculo">
-                    <table>
+                    <table class="table-veiculo">
                         <thead>
                             <tr>
                                 <th>id_carro</th>
@@ -103,10 +118,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                            <tr class="itens-veiculo model">
+                                <td class="id_veiculo"></td>
+                                <td class="placa_veiculo"></td>
+                                <td class="situacao_veiculo"></td>
                             </tr>
                         </tbody>
                     </table>
