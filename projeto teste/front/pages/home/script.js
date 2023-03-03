@@ -1,4 +1,7 @@
 // pegar informações do usuario
+
+const urlVeiculo = 'http://localhost:3000/readVeiculo'
+
 function user() {
     let usuario = JSON.parse(localStorage.getItem("user"));
 
@@ -90,21 +93,21 @@ const itensVeiculo = document.querySelector('.itens-veiculo')
 function listarFrota() {
     const options = { method: 'GET' };
 
-    fetch('http://localhost:3000/readVeiculo', options)
+    fetch(urlVeiculo, options)
         .then(response => response.json())
         .then(resp => {
             resp.forEach((e) => {
-                
+
                 var lista = itensVeiculo.cloneNode(true)
                 lista.classList.remove('model')
 
                 lista.querySelector('.id_veiculo').innerHTML = e.id
                 lista.querySelector('.placa_veiculo').innerHTML = e.placa
-                if(e.Servico.length > 1 && e.Manutencao.length > 1){
+                if (e.Servico.length > 1 && e.Manutencao.length > 1) {
                     lista.querySelector('.situacao_veiculo').innerHTML = 'disponivel'
-                }else if(e.Manutencao.length == 1){
+                } else if (e.Manutencao.length == 1) {
                     lista.querySelector('.situacao_veiculo').innerHTML = 'em manutenção'
-                }else{
+                } else {
                     lista.querySelector('.situacao_veiculo').innerHTML = 'em serviço'
                 }
                 tableVeiculo.appendChild(lista)
@@ -112,10 +115,83 @@ function listarFrota() {
         })
 }
 
-function carregar(){
+const tableManutencao = document.querySelector('.relatorio-manu')
+const itensVeiculoManutencao = document.querySelector('.itens_veiculo_manutencao')
+
+function listarRelatorioManutencao() {
+    const options = { method: 'GET' };
+
+    fetch('http://localhost:3000/readManutencao', options)
+        .then(response => response.json())
+        .then(res => {
+            res.forEach((e) => {
+                var lista = itensVeiculoManutencao.cloneNode(true)
+                lista.classList.remove('model')
+
+                var data1 = new Date(e.data_inicio);
+                var data2 = new Date(e.data_fim);
+
+                let dataFormatada = data1.toLocaleDateString("pt-BR", {
+                    timeZone: "UTC",
+                });
+
+                let dataFormatada2 = data2.toLocaleDateString("pt-BR", {
+                    timeZone: "UTC",
+                });
+
+                lista.querySelector('.id_veiculo_manutencao').innerHTML = e.id_veiculo
+                lista.querySelector('.descicao_manutenca').innerHTML = e.descricao
+                lista.querySelector('.data_inicio').innerHTML = dataFormatada
+                if (e.data_fim == null) {
+                    lista.querySelector('.data_fim').innerHTML = 'manutenção em andamento'
+                } else {
+                    lista.querySelector('.data_fim').innerHTML = dataFormatada2
+                }
+
+                lista.querySelector('.valor').innerHTML = e.valor
+                tableManutencao.appendChild(lista)
+            })
+        })
+}
+
+const tableAloca = document.querySelector('.table-aloca')
+const itensAloca = document.querySelector('.itens-aloca')
+
+function relatorioAlocacao() {
+
+    const options = { method: 'GET' };
+
+    fetch(urlVeiculo    , options)
+        .then(response => response.json())
+        .then(resp => {
+            resp.forEach((e) => {
+                var lista = itensAloca.cloneNode(true)
+                lista.classList.remove('model')
+
+                console.log(e.Manutencao.length)
+                lista.querySelector('.id_vei').innerHTML = e.id
+                lista.querySelector('.modelo-vei').innerHTML = e.modelo
+                lista.querySelector('.marca-vei').innerHTML = e.marca
+                lista.querySelector('.placa_vei').innerHTML = e.placa
+                lista.querySelector('.servico_vei').innerHTML = e.Servico
+                if (e.Manutencao.length > 1) {
+                    lista.querySelector('.manutencao_vei').innerHTML = e.Manutencao
+                } else if (e.Manutencao.length == 1) {
+                    lista.querySelector('.manutencao_vei').innerHTML = 'em manutenção'
+                }
+                tableAloca.appendChild(lista)
+            })
+        })
+}
+
+function carregar() {
+    relatorioAlocacao()
+    listarRelatorioManutencao()
     listarDispo()
     listarFrota()
     user()
 }
 
+
 carregar()
+

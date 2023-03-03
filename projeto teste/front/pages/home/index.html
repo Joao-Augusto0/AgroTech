@@ -134,18 +134,26 @@
         <div class="modal">
             <button class="fechar">x</button>
             <h3>relatório de manutenção</h3>
-            <div>
-                <table>
+            <div class="manu">
+                <table class="relatorio-manu">
                     <thead>
                         <tr>
                             <th>id_carro</th>
                             <th>descricao</th>
-                            <th>valor</th>
                             <th>data_inicio</th>
                             <th>data_fim</th>
+                            <th>valor</th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody>
+                        <tr class="itens_veiculo_manutencao model">
+                            <td class="id_veiculo_manutencao"></td>
+                            <td class="descicao_manutenca"></td>
+                            <td class="data_inicio"></td>
+                            <td class="data_fim"></td>
+                            <td class="valor"></td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -155,10 +163,74 @@
         <div class="modal">
             <button class="fechar">x</button>
             <h3>relatório de alocação</h3>
+            <div class="aloca">
+                <table class="table-aloca">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>modelo</th>
+                            <th>marca</th>
+                            <th>placa</th>
+                            <th>serviço</th>
+                            <th>manutenção</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="itens-aloca model">
+                            <td class="id_vei"></td>
+                            <td class="modelo-vei"></td>
+                            <td class="marca-vei"></td>
+                            <td class="placa_vei"></td>
+                            <td class="servico_vei"></td>
+                            <td class="manutencao_vei"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
+    <canvas id="myChart"></canvas>
 
 </body>
 <script src="script.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+      var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
+                datasets: [{
+                    label: 'Motoristas',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+</script>
 </html>
