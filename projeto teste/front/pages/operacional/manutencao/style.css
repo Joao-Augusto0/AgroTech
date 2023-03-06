@@ -1,9 +1,4 @@
 .manu {
-    background-color: rgb(42, 138, 57);;
+    background-color: #00B4D8;;
 }
 
-.infoGen:hover {
-    background-color: rgb(42, 138, 57);
-    cursor: pointer;
-    transition: 0.7s;
-}

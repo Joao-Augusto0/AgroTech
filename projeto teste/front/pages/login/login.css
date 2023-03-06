@@ -18,7 +18,8 @@
 
 .agro {
     margin: auto;
-    background-image: url('https://www.digitizeme.blog/hubfs/Texto%205%20-%20IoT.png');
+    /* background-image: url('https://www.digitizeme.blog/hubfs/Texto%205%20-%20IoT.png'); */
+    background-color: #023E8A;
     background-repeat: no-repeat;
     background-size: cover;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
@@ -34,8 +35,8 @@
 }
 
 .logo {
-    height: 200px;
-    width: 200px;
+    height: 400px;
+    width:400px;
 }
 
 .formulario {
@@ -55,14 +56,16 @@
     margin-top:40px;
     border: 1px solid black;
     border-radius: 10px;
+    background-color: white;
 }
 .form2{
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top:10px;
-    border: 1px solid black;
+    border: 1px solid rgb(0, 0, 0);
     border-radius: 10px;
+    background-color: white;
 }
 
 .form1 img {
@@ -91,14 +94,17 @@ input {
     width: 150px;
     margin-top:30%;
     cursor: pointer;
-    background-color:white;
+    color: white;
+    background-color: rgb(37, 227, 163);
     border: none;
     transition: all 0.5s;
     border-radius: 10px;
+    font-size: medium;
 }
 
 #btn:hover{
-    background-color: rgb(85, 201, 162);
+    background-color:white;
+    color: black;
 }
 
 #error-message {

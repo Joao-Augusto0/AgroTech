@@ -1,15 +1,15 @@
 .relatorios {
-    height: 92%;
-    background-color: blanchedalmond;
+    height: 87%;
+    background-color: #ADE8F4;
 }
 
 .dashboard {
-    height: 30%;
-    background-color: rgb(138, 228, 111);
+    height:50%;
+    background-color: #CAF0F8;
 }
 
 .info-rel {
-    height: 70%;
+    height: 50%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     text-align: center;
@@ -26,7 +26,7 @@
 }
 
 .info:hover {
-    background-color: rgb(214, 173, 110);
+    background-color: #48CAE4;
     cursor: pointer;
     transition: 0.7s;
 }
@@ -54,12 +54,13 @@
 }
 
 .home {
-    background-color: rgb(42, 138, 57);
+    background-color: #00B4D8;
     ;
 }
 
 .infoGen:hover {
-    background-color: rgb(42, 138, 57);
+    background-color: #CAF0F8;
+    color: black;
     cursor: pointer;
     transition: 0.7s;
 }
@@ -110,7 +111,10 @@
     right: 0;
     width: 50px;
     height: 50px;
-    border-radius: 50%;
+    background-color: white;
+    border: none;
+    font-size: 4vh;
+    color: red;
 }
 
 .ralati-dispo {
@@ -120,24 +124,9 @@
     gap: 20px;
 }
 
-.btn{
-    height: 50px;
-    width: 289px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background-color: rgb(181, 255, 149);
-    border: none;
-}
-
-.btn:hover{
-    background-color: rgb(0, 255, 42);
-    cursor: pointer;
-    transition: 0.7s;
-}
 
 table {
-    background-color: rgb(135, 255, 153);;
+    background-color: rgb(81, 221, 239);;
     border: 1px solid black;
 }
 
@@ -151,7 +140,6 @@ th ,td{
 }
 
 .manu{
-    margin-top: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -163,3 +151,8 @@ th ,td{
     align-items: center;
     justify-content: center;
 }
+
+h3{
+    margin: 3vh;
+}
+

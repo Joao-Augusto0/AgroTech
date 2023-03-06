@@ -10,7 +10,7 @@ body {
 
 a {
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
 .container {
@@ -21,26 +21,27 @@ a {
 .aside {
     height: 100%;
     width: 15%;
-    background-color: rgb(138, 199, 145);
+    background-color: #023E8A;
+    color: white;
 }
 
 .titulo {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 8%;
-    background-color: rgb(100, 197, 249);
+    height: 13%;
+    background-color: #023E8A;
 }
 
 .dash {
     height: 100%;
     width: 85%;
-    background-color: #e1ffc5;
+    background-color: #CFFCFF;
 }
 
 .topo-main {
-    height: 8%;
-    background-color: rgb(100, 197, 249);
+    height: 13%;
+    background-color: #03045E;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -78,11 +79,13 @@ a {
 
 .dados-perfil p {
     font-size: 1.5em;
+    color: white;
 }
 
 .perfil {
     height: 45px;
     width: 45px;
+    
 }
 
 .gerencial {
@@ -99,4 +102,34 @@ a {
     height: 50px;
     justify-content: center;
     align-items: center;
+}
+
+.btn-sair{
+    height: 50px;
+    width: 15%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #023E8A;
+    border: none;
+    color: white;
+}
+
+.btn-sair:hover{
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+    transition: 0.7s;
+    color: black;
+}
+
+.infoGen:hover {
+    background-color: #CAF0F8;
+    color: black;
+    cursor: pointer;
+    transition: 0.7s;
+}
+
+.logo{
+    height: 300px;
+    width: 400px;
 }
