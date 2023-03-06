@@ -13,10 +13,10 @@ function listarMotoristas() {
         var lista = itensMoto.cloneNode(true)
         lista.classList.remove('model')
 
-        lista.querySelector('#id').innerHTML = element.id_motorista
-        lista.querySelector('#nome').innerHTML = element.nome
-        lista.querySelector('#cpf').innerHTML = element.cpf
-        lista.querySelector('#cnh').innerHTML = element.cnh
+        lista.querySelector('#id').innerHTML = "id: " + element.id_motorista
+        lista.querySelector('#nome').innerHTML ="nome: " + element.nome
+        lista.querySelector('#cpf').innerHTML = "cpf: " + element.cpf
+        lista.querySelector('#cnh').innerHTML = "cnh: "+ element.cnh
 
         tableMoto.appendChild(lista);
       })
@@ -62,9 +62,13 @@ function cadastrarMotorista() {
   fetch('http://localhost:3000/createMotorista', options)
     .then(response => {
      console.log(response)
-     window.location.reload()
+    window.location.reload()
     })
     .then(res =>console.log(res))
+}
+
+function excluirFunc(){
+
 }
 
 listarMotoristas()

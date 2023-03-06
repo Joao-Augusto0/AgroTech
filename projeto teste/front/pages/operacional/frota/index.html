@@ -12,7 +12,6 @@
 </head>
 
 <body>
-    <header></header>
     <main class="container">
         <aside class="aside">
             <div class="titulo">
@@ -47,15 +46,18 @@
                     <p>role:</p>
                 </div>
             </header>
-            <div class="relatorios">
-                <div class="dashboard">
-
-                </div>
-                <div class="info-rel">
-                    
+            <div class="frota">
+                <button onclick="abrirModalCadastro()" class="btn">cadastrar</button>
+                <div class="table-frota">
+                    <div class="itens-frota model">
+                        <p id="id"></p>
+                        <p id="placa"></p>
+                        <p id="modelo"></p>
+                        <p id="marca"></p>
+                        <button class="btn_exclui">x</button>
+                    </div>
                 </div>
             </div>
-        </div>
 
     </main>
 </body>
