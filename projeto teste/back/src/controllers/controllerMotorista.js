@@ -14,8 +14,9 @@ const read = async (req, res) => {
         select: {
             id_motorista: true,
             nome: true,
-            cpf:true,
+            cpf: true,
             cnh: true,
+            ocupado: true,
             Servico: {
                 select: {
                     data_saida: true,
@@ -30,12 +31,30 @@ const read = async (req, res) => {
 
 const update = async (req, res) => {
     let motorista = await prisma.motorista.update({
-        where:{
+        where: {
             id_motorista: Number(req.params.id)
         },
-        data:req.body
+        data: req.body
     })
     res.status(200).json(motorista).end()
+}
+
+const updateDisponivel = async (id) => {
+    let motorista = await prisma.motorista.update({
+        where: {
+            id_motorista: Number(id)
+        },
+        data: { ocupado: false }
+    })
+}
+
+const updateIndisponivel = async (id) => {
+    let motorista = await prisma.motorista.update({
+        where: {
+            id_motorista: Number(id)
+        },
+        data: { ocupado: true }
+    })
 }
 
 const del = async (req, res) => {
@@ -51,5 +70,7 @@ module.exports = {
     create,
     read,
     update,
-    del
+    del,
+    updateDisponivel,
+    updateIndisponivel
 }
