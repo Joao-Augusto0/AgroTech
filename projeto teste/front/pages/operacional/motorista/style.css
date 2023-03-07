@@ -1,6 +1,5 @@
 .moto {
     background-color:  #00B4D8;
-    ;
 }
 
 .dash {
@@ -87,8 +86,6 @@ form {
     flex-direction: column;
     align-items: center;
 }
-
-
 
 .btn {
     height: 45px;

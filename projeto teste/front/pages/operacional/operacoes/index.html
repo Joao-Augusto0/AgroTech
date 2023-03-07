@@ -50,17 +50,37 @@
                     <p>role:</p>
                 </div>
             </header>
-            <div class="relatorios">
-                <div class="dashboard">
-
+            <div class="servico">
+                <button onclick="abrirModalCadastro()" class="btn">cadastrar</button>
+                <div class="table-servico">
+                    <div class="itens-servico model">
+                        <p id="id"></p>
+                        <p id="data_saida"></p>
+                        <p id="data_retorno"></p>
+                        <p id="descricao"></p>
+                        <p id="id_motorista"></p>
+                        <p id="id_veiculo"></p>
+                        <button class="btn_exclui">x</button>
+                    </div>
                 </div>
-                <div class="info-rel">
-                  
+            </div>
+            <div class="modal-container">
+                <div class="modal">
+                    <button onclick="fecharModalCadastro()" class="fechar">x</button>
+                    <h3>Cadastro de Veiculo</h3>
+                    <div class="formulario-cadastro">
+                        <form action="">
+                            <input class="inpDescricao" placeholder="Descrição" type="text">
+                            <input class="inpIdMotorista" placeholder="id_Motorista" type="text">
+                            <input class="inpIdVeiculo" placeholder="id_veiculo" type="text">
+                        </form>
+                        <button onclick="cadastrarServico()" class="btn">confirmar</button>
+                    </div>
                 </div>
             </div>
         </div>
 
     </main>
 </body>
-
+<script src="script.js"></script>
 </html>
