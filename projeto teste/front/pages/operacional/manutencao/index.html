@@ -50,17 +50,37 @@
                     <p>role:</p>
                 </div>
             </header>
-            <div class="relatorios">
-                <div class="dashboard">
-
+            <div class="manutencao">
+                <button onclick="abrirModalCadastro()" class="btn">cadastrar</button>
+                <div class="table-manutencao">
+                    <div class="itens-manutencao model">
+                        <p id="id"></p>
+                        <p id="descricao"></p>
+                        <p id="valor"></p>
+                        <p id="data_inicio"></p>
+                        <p id="data_fim"></p>
+                        <p id="id_veiculo"></p>
+                        <button class="btn_exclui">x</button>
+                    </div>
                 </div>
-                <div class="info-rel">
-                   
+            </div>
+            <div class="modal-container">
+                <div class="modal">
+                    <button onclick="fecharModalCadastro()" class="fechar">x</button>
+                    <h3>Manutenção</h3>
+                    <div class="formulario-cadastro">
+                        <form action="">
+                            <input required class="inpDescricao" placeholder="Descrição" type="text">
+                            <input required class="inpValor" placeholder="Valor" type="text">
+                            <input required class="inpIdVeiculo" placeholder="Id_veiculo" type="text">
+                        </form>
+                        <button onclick="cadastrarManutencao()" class="btn">confirmar</button>
+                    </div>
                 </div>
             </div>
         </div>
 
     </main>
 </body>
-
+<script src="script.js"></script>
 </html>

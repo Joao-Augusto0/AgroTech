@@ -57,6 +57,7 @@
                         <p id="placa"></p>
                         <p id="modelo"></p>
                         <p id="marca"></p>
+                        <p id="tipo"></p>
                         <button class="btn_exclui">x</button>
                     </div>
                 </div>
@@ -67,9 +68,14 @@
                     <h3>Cadastro de Veiculo</h3>
                     <div class="formulario-cadastro">
                         <form action="">
-                            <input class="inpPlaca" placeholder="Placa" type="text">
-                            <input class="inpModelo" placeholder="Modelo" type="text">
-                            <input class="inpMarca" placeholder="Marca" type="text">
+                            <input required class="inpPlaca" placeholder="Placa" type="text">
+                            <input required class="inpModelo" placeholder="Modelo" type="text">
+                            <input required class="inpMarca" placeholder="Marca" type="text">
+                            <select required placeholder="tipo" class="tipoVeiculo" name="" id="">
+                                <option value="Carga">Carga</option>
+                                <option value="Visita">Visita</option>
+                                <option value="Vendas">Vendas</option>
+                            </select>
                         </form>
                         <button onclick="cadastrarFrota()" class="btn">confirmar</button>
                     </div>

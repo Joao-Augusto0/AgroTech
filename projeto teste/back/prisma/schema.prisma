@@ -32,6 +32,7 @@ model Frota {
   modelo     String
   marca      String
   placa      String
+  tipo       String
   ocupado    Boolean      @default(false) //0 está não esta ocupado e 1 esta ocupado
   Servico    Servico[]
   Manutencao Manutencao[]

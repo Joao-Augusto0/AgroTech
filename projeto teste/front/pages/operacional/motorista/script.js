@@ -2,6 +2,8 @@ const tableMoto = document.querySelector('.table-motoristas')
 
 const itensMoto = document.querySelector('.itens-motorista')
 
+// listar por filtro com os dados do motorista
+
 function listarMotoristas() {
   const options = { method: 'GET' };
 
@@ -14,9 +16,9 @@ function listarMotoristas() {
         lista.classList.remove('model')
 
         lista.querySelector('#id').innerHTML = "id: " + element.id_motorista
-        lista.querySelector('#nome').innerHTML ="nome: " + element.nome
+        lista.querySelector('#nome').innerHTML = "nome: " + element.nome
         lista.querySelector('#cpf').innerHTML = "cpf: " + element.cpf
-        lista.querySelector('#cnh').innerHTML = "cnh: "+ element.cnh
+        lista.querySelector('#cnh').innerHTML = "cnh: " + element.cnh
 
         tableMoto.appendChild(lista);
       })
@@ -59,16 +61,15 @@ function cadastrarMotorista() {
     body: JSON.stringify(dados)
   };
 
+
+  console.log(inpCnh.value.length)
+
   fetch('http://localhost:3000/createMotorista', options)
     .then(response => {
-     console.log(response)
-    window.location.reload()
+      console.log(response)
+      window.location.reload()
     })
-    .then(res =>console.log(res))
-}
-
-function excluirFunc(){
-
+    .then(res => console.log(res))
 }
 
 listarMotoristas()

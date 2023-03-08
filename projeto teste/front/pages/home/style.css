@@ -1,3 +1,7 @@
+.home {
+    background-color: #00B4D8;
+}
+
 .relatorios {
     height: 87%;
     background-color: #ADE8F4;
@@ -46,25 +50,6 @@
     margin-top: 12px;
 }
 
-.infoGen {
-    display: flex;
-    height: 50px;
-    justify-content: center;
-    align-items: center;
-}
-
-.home {
-    background-color: #00B4D8;
-    ;
-}
-
-.infoGen:hover {
-    background-color: #CAF0F8;
-    color: black;
-    cursor: pointer;
-    transition: 0.7s;
-}
-
 .op {
     display: flex;
     height: 50px;
@@ -94,7 +79,6 @@
     display: flex;
 }
 
-
 .modal {
     background-color: white;
     height: 90%;
@@ -123,7 +107,6 @@
     justify-content: center;
     gap: 20px;
 }
-
 
 table {
     background-color: rgb(81, 221, 239);;

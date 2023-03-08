@@ -8,18 +8,28 @@ function listarServico() {
     fetch('http://localhost:3000/readOperacao', options)
         .then(response => response.json())
         .then(res => {
-            console.log(res)
             res.forEach(element => {
 
                 var lista = itensServico.cloneNode(true)
                 lista.classList.remove('model')
 
+                var data1 = new Date(element.data_saida);
+                var data2 = new Date(element.data_retorno);
+
+                let dataFormatada = data1.toLocaleDateString("pt-BR", {
+                    timeZone: "UTC",
+                });
+
+                let dataFormatada2 = data2.toLocaleDateString("pt-BR", {
+                    timeZone: "UTC",
+                });
+
                 lista.querySelector('#id').innerHTML = "id: " + element.id
-                lista.querySelector('#data_saida').innerHTML = "data_saida: " + element.data_saida
+                lista.querySelector('#data_saida').innerHTML = "data_saida: " + dataFormatada
                 if (element.data_retorno == null) {
                     lista.querySelector('#data_retorno').innerHTML = "data_retorno: " + 'ainda não retornou'
                 } else {
-                    lista.querySelector('#data_retorno').innerHTML = "data_retorno: " + element.data_retorno
+                    lista.querySelector('#data_retorno').innerHTML = "data_retorno: " + dataFormatada2
                 }
                 lista.querySelector('#descricao').innerHTML = "descrição: " + element.descricao
                 lista.querySelector('#id_motorista').innerHTML = "id_motorista: " + element.id_motorista
@@ -70,14 +80,24 @@ function cadastrarServico() {
 
     fetch('http://localhost:3000/createOperacao', options)
         .then(response => {
-            console.log(response)
-            window.location.reload()
+            return response.json()
         })
-        .then(res => console.log(res))
+        .then(res => {
+
+            console.log(res.menssagem)
+            if (res.menssagem) {
+                document.getElementById("error-message").style.display = "block"
+                document.getElementById("error-message").innerHTML = res.menssagem
+            } else {
+                window.location.reload()
+            }
+
+        })
+
 }
 
-function excluirFrota() {
+// function atualizarOperação() {
 
-}
+// }
 
 listarServico()

@@ -85,6 +85,7 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 5px;
 }
 
 .btn {
@@ -107,4 +108,9 @@ form {
 .fechar:hover {
     background-color: antiquewhite;
     cursor: pointer;
+}
+
+select{
+    height: 20px;
+    width: 153px;
 }

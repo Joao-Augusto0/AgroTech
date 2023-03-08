@@ -81,7 +81,6 @@ function listarDispo() {
                 } else if (e.Servico.length == 0) {
                     lista.querySelector('.situacao_motorista').innerHTML = 'disponivel'
                 }
-
                 tableMoto.appendChild(lista);
             })
         })
@@ -161,23 +160,29 @@ function relatorioAlocacao() {
 
     const options = { method: 'GET' };
 
-    fetch(urlVeiculo    , options)
+    fetch(urlVeiculo, options)
         .then(response => response.json())
         .then(resp => {
             resp.forEach((e) => {
                 var lista = itensAloca.cloneNode(true)
                 lista.classList.remove('model')
 
-                console.log(e.Manutencao.length)
                 lista.querySelector('.id_vei').innerHTML = e.id
                 lista.querySelector('.modelo-vei').innerHTML = e.modelo
                 lista.querySelector('.marca-vei').innerHTML = e.marca
                 lista.querySelector('.placa_vei').innerHTML = e.placa
-                lista.querySelector('.servico_vei').innerHTML = e.Servico
+                if (e.Servico.length == 1) {
+                    lista.querySelector('.servico_vei').innerHTML = e.Servico[0].descricao
+                } else {
+                    lista.querySelector('.servico_vei').innerHTML = e.Servico
+                }
+
                 if (e.Manutencao.length > 1) {
                     lista.querySelector('.manutencao_vei').innerHTML = e.Manutencao
                 } else if (e.Manutencao.length == 1) {
                     lista.querySelector('.manutencao_vei').innerHTML = 'em manutenção'
+                    lista.querySelector('.servico_vei').innerHTML = 'quebrou no meio do serviço'
+
                 }
                 tableAloca.appendChild(lista)
             })

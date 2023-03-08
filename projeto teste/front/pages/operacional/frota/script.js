@@ -2,6 +2,9 @@ const tableFrota = document.querySelector('.table-frota')
 
 const itensFrota = document.querySelector('.itens-frota')
 
+
+// listar por filtro com os dados do motorista
+
 function listarFrota() {
     const options = { method: 'GET' };
 

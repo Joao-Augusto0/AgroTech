@@ -104,6 +104,14 @@ a {
     align-items: center;
 }
 
+.infoGen:hover {
+    background-color: #CAF0F8;
+    color: black;
+    cursor: pointer;
+    transition: 0.7s;
+}
+
+
 .btn-sair{
     height: 50px;
     width: 15%;
@@ -120,13 +128,6 @@ a {
     cursor: pointer;
     transition: 0.7s;
     color: black;
-}
-
-.infoGen:hover {
-    background-color: #CAF0F8;
-    color: black;
-    cursor: pointer;
-    transition: 0.7s;
 }
 
 .logo{
