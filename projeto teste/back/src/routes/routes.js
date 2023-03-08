@@ -13,28 +13,30 @@ const motorista = require('../controllers/controllerMotorista')
 
 router.post('/createMotorista',motorista.create)
 router.get('/readMotorista', motorista.read)
-router.delete('/deleteMotorista/:id',middleware.autenticacao, motorista.del)
-router.put('/putMotorista/:id',middleware.autenticacao, motorista.update)
+router.delete('/deleteMotorista/:id', motorista.del)
+router.put('/putMotorista/:id', motorista.update)
 
 const frota = require('../controllers/controllerVeiculo')
 
 router.post('/createVeiculo', frota.create)
 router.get('/readVeiculo',frota.read)
-router.delete('/deleteVeiculo/:id', middleware.autenticacao, frota.del)
-router.put('/putVeiculo/:id', middleware.autenticacao, frota.update)
+router.delete('/deleteVeiculo/:id',  frota.del)
+router.put('/putVeiculo/:id',  frota.update)
 
 const manutencao = require('../controllers/constrollerManutencoes')
 
 router.post('/createManutencao', manutencao.create)
 router.get('/readManutencao', manutencao.read)
-router.delete('/deleteManutencao/:id' , middleware.autenticacao, manutencao.del)
-router.put('/putManutencao/:id', middleware.autenticacao, manutencao.update)
+router.delete('/deleteManutencao/:id' ,  manutencao.del)
+router.put('/putManutencao/:id',  manutencao.update)
+
+// router.put('/manutencaoVeiculo', manutencao.updateManutencaoServico)
 
 const operacao = require('../controllers/controllerOperacoes')
 
 router.post("/createOperacao", operacao.create)
 router.get("/readOperacao", operacao.read)
-router.put("/putOperacao/:id", middleware.autenticacao, operacao.update)
-router.delete("/deleteOperacao/:id", middleware.autenticacao, operacao.del)
+router.put("/putOperacao/:id", operacao.update)
+router.delete("/deleteOperacao/:id",  operacao.del)
 
 module.exports = router

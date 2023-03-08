@@ -9,26 +9,28 @@
 .servico {
     height: 80%;
     display: flex;
-    flex-direction: column;
     align-items: center;
 }
 
 .table-servico {
-    height: 340px;
-    background-color: black;
+    width: 100%;
+    height: 80%;
     overflow-y: scroll;
     scroll-behavior: smooth;
-    margin-top: 10px;
 }
 
 .itens-servico {
     background-color: rgb(255, 255, 255);
-    height: fit-content;
-    width: 200px;
-    border-radius: 20px;
+    height: 15%;
+    width: 90%;
     margin: 10px;
-    padding: 5px;
     position: relative;
+    border: solid 1px black;
+    margin-left: 5%;
+    font-size: 23px;
+    display: flex;
+    align-items:center ;
+    justify-content: space-around;
 }
 
 .btn_exclui {
@@ -39,7 +41,7 @@
     right: 0;
     border: none;
     border-radius: 10px;
-    background-color: bisque;
+    background-color:transparent;
 }
 
 .btn_exclui:hover{
@@ -86,12 +88,16 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 10%;
 }
 
 .btn {
     height: 45px;
     width: 150px;
     margin-top: 40px;
+    position: absolute;
+    margin-top: 40%;
+    margin-left: 75%;
 }
 
 .fechar {
@@ -101,14 +107,36 @@ form {
     border: none;
     position: absolute;
     top: 0;
-    left: 0;
-    background-color: brown;
+    left:96%;
+    font-size: 20px;
+    background-color: transparent;
+    color: red;
 }
 
 .fechar:hover {
-    background-color: antiquewhite;
     cursor: pointer;
 }
+
+input{
+    margin: 10px;
+    border: none;
+    border-bottom: 1px solid black;
+    background-color: transparent;
+    outline: none;
+}
+
+h3{
+    margin-top: 5%;
+}
+
+mdbtn{
+    height: 45px;
+    width: 150px;
+    margin-top: 40px;
+    position: absolute;
+   
+}
+
 
 #error-message {
     color: red;

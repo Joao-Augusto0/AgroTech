@@ -1,5 +1,6 @@
 const { PrismaClient } = require('@prisma/client')
 const Veiculo = require('../controllers/controllerVeiculo')
+const Operacao = require('../controllers/controllerOperacoes')
 
 const prisma = new PrismaClient()
 
@@ -54,6 +55,28 @@ const update = async (req, res) => {
     res.status(200).json(manutencao).end()
 }
 
+// const updateManutencaoServico = async (req, res) => {
+//     let manutencao = await prisma.manutencao.update({
+//         where: {
+//             id: Number(req.body.id_veiculo)
+//         },
+//         data:req.body
+//     })
+
+//     let info = {}
+//     info.body = {
+//         "descricao": "veiculo quebrou durante o serviço"
+//     }
+
+//     info.params = {
+//         "id":Number(req.body.id_veiculo)
+//     }
+
+//     Operacao.update(info)
+
+    // res.status(200).json(manutencao).end()
+// }
+
 const del = async (req, res) => {
     let manutencao = await prisma.manutencao.delete({
         where: {
@@ -68,5 +91,6 @@ module.exports = {
     create,
     read,
     update,
-    del
+    del,
+    // updateManutencaoServico
 }

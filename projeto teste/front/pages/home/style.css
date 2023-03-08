@@ -111,6 +111,7 @@
 table {
     background-color: rgb(81, 221, 239);;
     border: 1px solid black;
+    font-size: 1.7em;
 }
 
 th ,td{

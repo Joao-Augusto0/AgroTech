@@ -82,7 +82,6 @@ const read = async (req, res) => {
 
 const update = async (req, res) => {
     var info = req.body
-
     let servico = await prisma.servico.update({
         where: {
             id: Number(req.params.id)
@@ -95,6 +94,7 @@ const update = async (req, res) => {
         Motorista.updateDisponivel(req.body.id_motorista)
     }
 
+    // console.log(servico)
     res.status(200).json(servico).end()
 }
 
