@@ -1,5 +1,6 @@
 .manu {
-    background-color: #00B4D8;;
+    background-color: #00B4D8;
+    ;
 }
 
 .dash {
@@ -7,9 +8,11 @@
 }
 
 .manutencao {
-    height: 80%;
+    width: 100%;
+    margin-top:20px;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .table-manutencao {
@@ -19,18 +22,32 @@
     scroll-behavior: smooth;
 }
 
-.itens-manutencao {
-    background-color: rgb(255, 255, 255);
-    height: 15%;
-    width: 90%;
-    margin: 10px;
-    position: relative;
-    border: solid 1px black;
-    margin-left: 5%;
-    font-size: 20px;
+.scroll {
+    background-color: white;
+    height: 75vh;
+    width: 70%;
     display: flex;
-    align-items:center ;
-    justify-content: space-around;
+    justify-content: center;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    font-size: 1.7em;
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    min-height: 600px;
+    text-align: center;
+    min-height: 500px;
+}
+
+
+th,
+td {
+    padding: 10px;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    align-items: center;
 }
 
 .btn_exclui {
@@ -41,10 +58,10 @@
     right: 0;
     border: none;
     border-radius: 10px;
-    background-color:transparent;
+    background-color: transparent;
 }
 
-.btn_exclui:hover{
+.btn_exclui:hover {
     cursor: pointer;
 }
 
@@ -111,7 +128,7 @@ form {
     border: none;
     position: absolute;
     top: 0;
-    left:96%;
+    left: 96%;
     font-size: 20px;
     background-color: transparent;
     color: red;
@@ -121,11 +138,12 @@ form {
     cursor: pointer;
 }
 
-select{
+select {
     height: 20px;
     width: 160px;
 }
-input{
+
+input {
     margin: 10px;
     border: none;
     border-bottom: 1px solid black;
@@ -133,11 +151,11 @@ input{
     outline: none;
 }
 
-h3{
+h3 {
     margin-top: 5%;
 }
 
-mdbtn{
+mdbtn {
     height: 45px;
     width: 150px;
     position: absolute;

@@ -52,14 +52,24 @@
             </header>
             <div class="motoristas">
                 <button onclick="abrirModalCadastro()" class="btn">cadastrar</button>
-                <div class="table-motoristas">
-                    <div class="itens-motorista model">
-                        <p id="id"></p>
-                        <p id="nome"></p>
-                        <p id="cpf"></p>
-                        <p id="cnh"></p>
-                        <button class="btn_exclui">x</button>
-                    </div>
+                <div class="scroll">
+                    <table class="table-motoristas">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>CPF</th>
+                                <th>CNH</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="itens-motorista model">
+                                <td id="nome"></td>
+                                <td id="cpf"></td>
+                                <td id="cnh"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn_exclui">x</button>
                 </div>
             </div>
         </div>

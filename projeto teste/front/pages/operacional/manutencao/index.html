@@ -52,16 +52,29 @@
             </header>
             <div class="manutencao">
                 <button onclick="abrirModalCadastro()" class="btn">+</button>
-                <div class="table-manutencao">
-                    <div class="itens-manutencao model">
-                        <p id="id"></p>
-                        <p id="descricao"></p>
-                        <p id="valor"></p>
-                        <p id="data_inicio"></p>
-                        <p id="data_fim"></p>
-                        <p id="id_veiculo"></p>
-                        <button class="btn_exclui">x</button>
-                    </div>
+                <div class="scroll">
+                    <table class="table-manutencao">
+                        <thead>
+                            <tr>
+                                <th>Descrição</th>
+                                <th>Valor</th>
+                                <th>Data Inicio</th>
+                                <th>Data Fim</th>
+                                <th>Id_Veiculo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="itens-manutencao model">
+                                <td id="descricao"></td>
+                                <td id="valor"></td>
+                                <td id="data_inicio"></td>
+                                <td id="data_fim"></td>
+                                <td id="id_veiculo"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <button class="btn_exclui">x</button>
                 </div>
             </div>
             <div class="modal-container">
@@ -83,4 +96,5 @@
     </main>
 </body>
 <script src="script.js"></script>
+
 </html>

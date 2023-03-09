@@ -74,7 +74,7 @@ function listarDispo() {
                 var lista = linhaMoto.cloneNode(true)
                 lista.classList.remove('model')
 
-                lista.querySelector('.id_motorista').innerHTML = e.id_motorista
+                // lista.querySelector('.id_motorista').innerHTML = e.id_motorista
                 lista.querySelector('.nome_motorista').innerHTML = e.nome
                 if (e.Servico.length > 0) {
                     lista.querySelector('.situacao_motorista').innerHTML = 'em serviço'
@@ -100,7 +100,7 @@ function listarFrota() {
                 var lista = itensVeiculo.cloneNode(true)
                 lista.classList.remove('model')
 
-                lista.querySelector('.id_veiculo').innerHTML = e.id
+                // lista.querySelector('.id_veiculo').innerHTML = e.id
                 lista.querySelector('.placa_veiculo').innerHTML = e.placa
                 if (e.Servico.length > 1 && e.Manutencao.length > 1) {
                     lista.querySelector('.situacao_veiculo').innerHTML = 'disponivel'
@@ -138,7 +138,7 @@ function listarRelatorioManutencao() {
                     timeZone: "UTC",
                 });
 
-                lista.querySelector('.id_veiculo_manutencao').innerHTML = e.id_veiculo
+                // lista.querySelector('.id_veiculo_manutencao').innerHTML = e.id_veiculo
                 lista.querySelector('.descicao_manutenca').innerHTML = e.descricao
                 lista.querySelector('.data_inicio').innerHTML = dataFormatada
                 if (e.data_fim == null) {
@@ -167,7 +167,7 @@ function relatorioAlocacao() {
                 var lista = itensAloca.cloneNode(true)
                 lista.classList.remove('model')
 
-                lista.querySelector('.id_vei').innerHTML = e.id
+                // lista.querySelector('.id_vei').innerHTML = e.id
                 lista.querySelector('.modelo-vei').innerHTML = e.modelo
                 lista.querySelector('.marca-vei').innerHTML = e.marca
                 lista.querySelector('.placa_vei').innerHTML = e.placa

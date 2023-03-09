@@ -51,15 +51,26 @@
             </header>
             <div class="frota">
                 <button onclick="abrirModalCadastro()" class="btn">+</button>
-                <div class="table-frota">
-                    <div class="itens-frota model">
-                        <p id="id"></p>
-                        <p id="placa"></p>
-                        <p id="modelo"></p>
-                        <p id="marca"></p>
-                        <p id="tipo"></p>
-                        <button class="btn_exclui">x</button>
-                    </div>
+                <div class="scroll">
+                    <table class="table-frota">
+                        <thead>
+                            <tr>
+                                <th>Placa</th>
+                                <th>Modelo</th>
+                                <th>Marca</th>
+                                <th>Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="itens-frota model">
+                                <td id="placa"></td>
+                                <td id="modelo"></td>
+                                <td id="marca"></td>
+                                <td id="tipo"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn_exclui">x</button>
                 </div>
             </div>
             <div class="modal-container">

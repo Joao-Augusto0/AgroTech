@@ -8,7 +8,7 @@
 }
 
 .dashboard {
-    height:50%;
+    height: 50%;
     background-color: #CAF0F8;
 }
 
@@ -80,7 +80,7 @@
 }
 
 .modal {
-    background-color: white;
+    background-color: aliceblue;
     height: 90%;
     width: 60%;
     min-width: 300px;
@@ -108,35 +108,52 @@
     gap: 20px;
 }
 
-table {
-    background-color: rgb(81, 221, 239);;
-    border: 1px solid black;
-    font-size: 1.7em;
+.relatorio-dispo-moto {
+    height: 40%;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
 }
 
-th ,td{
+.relatorio-dispo-veiculo{
+    height: 40%;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+table {
+    font-size: 1.7em;
     border: 1px solid black;
-    padding: 5px;
+    padding: 20px;
+    min-height: 600px;
+}
+
+
+th,
+td {
+    padding: 7px;
+    border-bottom: 1px solid black;
 }
 
 .model {
     display: none;
 }
 
-.manu{
+.manuel {
+    height: 40%;
     display: flex;
-    align-items: center;
     justify-content: center;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
 }
 
-.aloca{
-    margin-top: 20px;
+.aloca {
+    height: 40%;
     display: flex;
-    align-items: center;
     justify-content: center;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
 }
 
-h3{
+h3 {
     margin: 3vh;
 }
-

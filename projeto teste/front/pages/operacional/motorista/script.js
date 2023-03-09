@@ -15,10 +15,10 @@ function listarMotoristas() {
         var lista = itensMoto.cloneNode(true)
         lista.classList.remove('model')
 
-        lista.querySelector('#id').innerHTML = "ID: " + element.id_motorista
-        lista.querySelector('#nome').innerHTML = "Nome: " + element.nome
-        lista.querySelector('#cpf').innerHTML = "CPF: " + element.cpf
-        lista.querySelector('#cnh').innerHTML = "CNH: " + element.cnh
+        // lista.querySelector('#id').innerHTML =  element.id_motorista
+        lista.querySelector('#nome').innerHTML =  element.nome
+        lista.querySelector('#cpf').innerHTML =  element.cpf
+        lista.querySelector('#cnh').innerHTML =  element.cnh
 
         tableMoto.appendChild(lista);
       })

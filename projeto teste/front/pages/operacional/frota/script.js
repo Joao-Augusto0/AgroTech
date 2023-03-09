@@ -11,16 +11,17 @@ function listarFrota() {
     fetch('http://localhost:3000/readVeiculo', options)
         .then(response => response.json())
         .then(res => {
-            console.log(res)
             res.forEach(element => {
 
                 var lista = itensFrota.cloneNode(true)
                 lista.classList.remove('model')
 
-                lista.querySelector('#id').innerHTML = "id: " + element.id
-                lista.querySelector('#placa').innerHTML = "placa: " + element.placa
-                lista.querySelector('#modelo').innerHTML = "modelo: " + element.modelo
-                lista.querySelector('#marca').innerHTML = "marca: " + element.marca
+                // lista.querySelector('#id').innerHTML = element.id
+                lista.querySelector('#placa').innerHTML = element.placa
+                lista.querySelector('#modelo').innerHTML = element.modelo
+                lista.querySelector('#marca').innerHTML = element.marca
+                // lista.querySelector('#tipo').innerHTML = element.marca
+                console.log(element)
 
                 tableFrota.appendChild(lista);
             })

@@ -24,16 +24,16 @@ function listarManutecoes() {
                     timeZone: "UTC",
                 });
 
-                lista.querySelector('#id').innerHTML = "id: " + element.id
-                lista.querySelector('#descricao').innerHTML = "descrição: " + element.descricao
-                lista.querySelector('#valor').innerHTML = "valor: " + element.valor
-                lista.querySelector('#data_inicio').innerHTML = "data_inicio: " + dataFormatada
+                // lista.querySelector('#id').innerHTML = element.id
+                lista.querySelector('#descricao').innerHTML = element.descricao
+                lista.querySelector('#valor').innerHTML = element.valor
+                lista.querySelector('#data_inicio').innerHTML = dataFormatada
                 if (element.data_fim == null) {
-                    lista.querySelector('#data_fim').innerHTML = "data_fim: " + "ainda em manutenção"
+                    lista.querySelector('#data_fim').innerHTML = "ainda em manutenção"
                 } else {
-                    lista.querySelector('#data_fim').innerHTML = "data_fim: " + dataFormatada2
+                    lista.querySelector('#data_fim').innerHTML = dataFormatada2
                 }
-                lista.querySelector('#id_veiculo').innerHTML = "id_veiculo: " + element.id_veiculo
+                lista.querySelector('#id_veiculo').innerHTML =  element.id_veiculo
 
                 tableManutencao.appendChild(lista);
             })

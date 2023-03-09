@@ -24,7 +24,7 @@ function listarServico() {
                     timeZone: "UTC",
                 });
 
-                lista.querySelector('#id').innerHTML = "id: " + element.id
+                // lista.querySelector('#id').innerHTML = "id: " + element.id
                 lista.querySelector('#data_saida').innerHTML = "data_saida: " + dataFormatada
                 if (element.data_retorno == null) {
                     lista.querySelector('#data_retorno').innerHTML = "data_retorno: " + 'ainda não retornou'
