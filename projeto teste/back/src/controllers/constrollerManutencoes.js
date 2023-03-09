@@ -2,6 +2,7 @@ const { PrismaClient } = require('@prisma/client')
 const Veiculo = require('../controllers/controllerVeiculo')
 const Operacao = require('../controllers/controllerOperacoes')
 
+
 const prisma = new PrismaClient()
 
 const create = async (req, res) => {
@@ -12,7 +13,8 @@ const create = async (req, res) => {
         },
         select: {
             ocupado: true,
-            Servico: true
+            Servico: true,
+            id: true
         }
     })
 
@@ -21,6 +23,8 @@ const create = async (req, res) => {
     let manutencao = await prisma.manutencao.create({
         data: info
     })
+
+    Operacao.updateServico(veiculo)
     res.status(201).end()
 }
 
@@ -40,7 +44,7 @@ const read = async (req, res) => {
 
 const update = async (req, res) => {
     info = req.body
-
+    info.valor = Number(req.body.valor)
     let manutencao = await prisma.manutencao.update({
         where: {
             id: Number(req.params.id)
@@ -55,27 +59,17 @@ const update = async (req, res) => {
     res.status(200).json(manutencao).end()
 }
 
-// const updateManutencaoServico = async (req, res) => {
-//     let manutencao = await prisma.manutencao.update({
-//         where: {
-//             id: Number(req.body.id_veiculo)
-//         },
-//         data:req.body
-//     })
+const updateManutencaoServico = async () => {
 
-//     let info = {}
-//     info.body = {
-//         "descricao": "veiculo quebrou durante o serviço"
-//     }
+    let manutencao = await prisma.manutencao.update({
+        data: { descricao: 'em manutenção' }
+    })
+    console.log(Operacao.updateServico(req.params.id))
 
-//     info.params = {
-//         "id":Number(req.body.id_veiculo)
-//     }
 
-//     Operacao.update(info)
+    res.status(200).json(manutencao).end()
 
-    // res.status(200).json(manutencao).end()
-// }
+}
 
 const del = async (req, res) => {
     let manutencao = await prisma.manutencao.delete({
@@ -92,5 +86,5 @@ module.exports = {
     read,
     update,
     del,
-    // updateManutencaoServico
+    updateManutencaoServico
 }

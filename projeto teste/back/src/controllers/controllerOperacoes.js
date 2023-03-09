@@ -94,9 +94,25 @@ const update = async (req, res) => {
         Motorista.updateDisponivel(req.body.id_motorista)
     }
 
-    // console.log(servico)
     res.status(200).json(servico).end()
 }
+
+const updateServico = async (info, req, res) => {
+    const timeElapsed = Date.now();
+
+    const today = new Date(timeElapsed);
+
+    if (info.Servico[0] != undefined) {
+        let servico = await prisma.servico.update({
+            where: {
+                id: Number(info.Servico[0].id)
+            },
+            data: { descricao: "foi levado para manutenção", data_retorno: today }
+        })
+    }
+}
+
+
 
 const del = async (req, res) => {
     let servico = await prisma.servico.delete({
@@ -111,5 +127,6 @@ module.exports = {
     create,
     read,
     update,
-    del
+    del,
+    updateServico
 }

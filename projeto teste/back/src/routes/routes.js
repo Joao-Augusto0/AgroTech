@@ -29,6 +29,7 @@ router.post('/createManutencao', manutencao.create)
 router.get('/readManutencao', manutencao.read)
 router.delete('/deleteManutencao/:id' ,  manutencao.del)
 router.put('/putManutencao/:id',  manutencao.update)
+    // router.put('/Manutencao/:id',  manutencao.updateManutencaoServico)
 
 // router.put('/manutencaoVeiculo', manutencao.updateManutencaoServico)
 
@@ -37,6 +38,7 @@ const operacao = require('../controllers/controllerOperacoes')
 router.post("/createOperacao", operacao.create)
 router.get("/readOperacao", operacao.read)
 router.put("/putOperacao/:id", operacao.update)
+router.put("/operacao/:id_veiculo", operacao.updateServico)
 router.delete("/deleteOperacao/:id",  operacao.del)
 
 module.exports = router
