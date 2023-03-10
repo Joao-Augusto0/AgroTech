@@ -63,26 +63,25 @@ function cadastrarMotorista() {
 
   fetch('http://localhost:3000/createMotorista', options)
     .then(response => {
-      // window.location.reload()
+      if (response.status === 201) {
+        window.location.reload()
+      }
       return response.json()
     })
     .then(res => {
-      if(res.erro){
+      console.log(res)
+      if (res.erro) {
         document.getElementById("error-message").style.display = "block"
         document.getElementById("error-message").innerHTML = "Campo Vazio"
       }
-      if(res.meta.target === 'Motorista_cnh_key'){
+      if (res.meta.target === 'Motorista_cnh_key') {
         document.getElementById("error-message").style.display = "block"
         document.getElementById("error-message").innerHTML = "CNH Ja Existe"
       }
-
-      if(res.meta.target === 'Motorista_cpf_key'){
+      if (res.meta.target === 'Motorista_cpf_key') {
         document.getElementById("error-message").style.display = "block"
         document.getElementById("error-message").innerHTML = "CPF Ja Existe"
       }
-      
-
-      console.log(res.meta.target)
     })
 }
 

@@ -6,7 +6,6 @@ const Operacao = require('../controllers/controllerOperacoes')
 const prisma = new PrismaClient()
 
 const create = async (req, res) => {
-
     let veiculo = await prisma.frota.findUnique({
         where: {
             id: req.body.id_veiculo
@@ -37,9 +36,9 @@ const read = async (req, res) => {
             data_inicio: true,
             data_fim: true,
             id_veiculo: true,
-            veiculo:{
-                select:{
-                    placa:true
+            veiculo: {
+                select: {
+                    placa: true
                 }
             }
         }

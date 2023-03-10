@@ -17,7 +17,7 @@
 .scroll {
     background-color: white;
     height: 75vh;
-    width: 70%;
+    width: 80%;
     display: flex;
     justify-content: center;
     overflow-y: scroll;
@@ -151,3 +151,9 @@ mdbtn{
     width: 150px;
     position: absolute;
 }
+
+#error-message {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }

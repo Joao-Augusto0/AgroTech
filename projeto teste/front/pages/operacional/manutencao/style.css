@@ -25,7 +25,7 @@
 .scroll {
     background-color: white;
     height: 75vh;
-    width: 70%;
+    width: 80%;
     display: flex;
     justify-content: center;
     overflow-y: scroll;

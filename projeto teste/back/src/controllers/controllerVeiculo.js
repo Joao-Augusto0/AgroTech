@@ -4,10 +4,18 @@ const prisma = new PrismaClient()
 
 const create = async (req, res) => {
 
-    let veiculo = await prisma.frota.create({
-        data: req.body
-    })
-    res.status(201).end()
+    if (req.body.modelo.length > 0 && req.body.marca.length > 0 && req.body.placa.length > 0 && req.body.tipo.length > 0) {
+        try {
+            let veiculo = await prisma.frota.create({
+                data: req.body
+            })
+            res.status(201).end()
+        } catch (error) {
+            res.status(400).send(error).end()
+        }
+    } else {
+        res.status(400).send({ message: 'campo vazio' }).end()
+    }
 }
 
 const read = async (req, res) => {
@@ -18,7 +26,7 @@ const read = async (req, res) => {
             marca: true,
             placa: true,
             ocupado: true,
-            tipo:true,
+            tipo: true,
             Servico: {
                 select: {
                     data_saida: true,
@@ -64,7 +72,7 @@ const updateDisponivel = async (id) => {
         where: {
             id: Number(id)
         },
-        data:{ocupado:false}
+        data: { ocupado: false }
     })
 }
 
@@ -73,7 +81,7 @@ const updateIndisponivel = async (id) => {
         where: {
             id: Number(id)
         },
-        data:{ocupado:true}
+        data: { ocupado: true }
     })
     console.log(veiculo)
 }

@@ -100,13 +100,18 @@ form {
 }
 
 .btn {
-    height: 45px;
-    width: 150px;
+    height: 60px;
+    width: 60px;
     margin-top: 40px;
     position: absolute;
     margin-top: 40%;
     margin-left: 75%;
+    border-radius: 100%;
+    font-size: 40px;
+    border: none;
+    background-color: rgb(0, 136, 255);
 }
+
 
 .fechar {
     height: 20px;

@@ -66,11 +66,22 @@ function cadastrarFrota() {
 
     fetch('http://localhost:3000/createVeiculo', options)
         .then(response => {
-            console.log(response)
-            // window.location.reload()
+            if (response.status === 201) {
+                window.location.reload()
+            }
             return response.json()
         })
-        .then(res => console.log(res))
+        .then(res => {
+            if (res.message === 'campo vazio') {
+                document.getElementById("error-message").style.display = "block"
+                document.getElementById("error-message").innerHTML = "Campo Vazio"
+            }
+            if (res.meta.target == 'Frota_placa_key') {
+                document.getElementById("error-message").style.display = "block"
+                document.getElementById("error-message").innerHTML = "PLACA JáRS Existe"
+            }
+
+        })
 }
 
 function excluirFrota() {

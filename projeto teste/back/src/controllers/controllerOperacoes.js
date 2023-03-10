@@ -6,55 +6,69 @@ const prisma = new PrismaClient()
 
 const create = async (req, res) => {
 
-    let veiculo = await prisma.frota.findUnique({
-        where: {
-            id: req.body.id_veiculo
-        },
-        select: {
-            ocupado: true,
-            Manutencao: true,
-            Servico: true
+    if (req.body.descricao.length > 0 && req.body.id_motorista != undefined && req.body.id_veiculo != undefined) {
+
+        try {
+            let motorista = await prisma.motorista.findUnique({
+                where: {
+                    id_motorista: req.body.id_motorista
+                },
+                select: {
+                    ocupado: true,
+                    Servico: true
+                }
+            })
+
+            if (motorista.Servico.length != 0) {
+                motorista.ocupado = true
+            }
+
+            if (motorista.ocupado == true) {
+                return res.status(200).json({ 'menssagem': "Motorista Ocupado" }).end()
+            }
+
+        } catch (error) {
+            return res.status(400).send({ menssagem: "Motorista não encontrado" }).end()
         }
-    })
 
-    if (veiculo.Manutencao.length != 0) {
-        veiculo.ocupado = true
-    }
+        try {
+            let veiculo = await prisma.frota.findUnique({
+                where: {
+                    id: req.body.id_veiculo
+                },
+                select: {
+                    ocupado: true,
+                    Manutencao: true,
+                    Servico: true
+                }
+            })
 
-    if (veiculo.Servico.length != 0) {
-        veiculo.ocupado = true
-    }
+            if (veiculo.Manutencao.length != 0) {
+                veiculo.ocupado = true
+            }
 
-    if (veiculo.ocupado == true) {
-        return res.status(200).json({ 'menssagem': "Veiculo Ocupado" }).end()
-    }
+            if (veiculo.Servico.length != 0) {
+                veiculo.ocupado = true
+            }
 
-    let motorista = await prisma.motorista.findUnique({
-        where: {
-            id_motorista: req.body.id_motorista
-        },
-        select: {
-            ocupado: true,
-            Servico: true
+            if (veiculo.ocupado == true) {
+                return res.status(200).json({ 'menssagem': "Veiculo Ocupado" }).end()
+            }
+        } catch (error) {
+            return res.status(400).send({ menssagem: "Veiculo Não encontrado" }).end()
         }
-    })
 
-    if (motorista.Servico.length != 0) {
-        motorista.ocupado = true
+        let servico = await prisma.servico.create({
+            data: req.body
+        })
+
+        Veiculo.updateIndisponivel(req.body.id_veiculo)
+        Motorista.updateIndisponivel(req.body.id_motorista)
+
+        res.status(200).json(servico).end()
+    } else {
+        res.status(400).send({ menssagem: 'campo vazio' }).end()
     }
-
-    if (motorista.ocupado == true) {
-        return res.status(200).json({ 'menssagem': "Motorista Ocupado" }).end()
-    }
-
-    let servico = await prisma.servico.create({
-        data: req.body
-    })
-
-    Veiculo.updateIndisponivel(req.body.id_veiculo)
-    Motorista.updateIndisponivel(req.body.id_motorista)
-
-    res.status(200).json(servico).end()
 }
 
 const read = async (req, res) => {
@@ -66,7 +80,7 @@ const read = async (req, res) => {
             descricao: true,
             veiculo: {
                 select: {
-                    placa:true,
+                    placa: true,
                     Manutencao: {
                         select: {
                             descricao: true
@@ -74,9 +88,9 @@ const read = async (req, res) => {
                     }
                 }
             },
-            motorista:{
-                select:{
-                    cpf:true
+            motorista: {
+                select: {
+                    cpf: true
                 }
             }
         }
