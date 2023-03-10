@@ -16,12 +16,10 @@ function listarFrota() {
                 var lista = itensFrota.cloneNode(true)
                 lista.classList.remove('model')
 
-                // lista.querySelector('#id').innerHTML = element.id
                 lista.querySelector('#placa').innerHTML = element.placa
                 lista.querySelector('#modelo').innerHTML = element.modelo
                 lista.querySelector('#marca').innerHTML = element.marca
-                // lista.querySelector('#tipo').innerHTML = element.marca
-                console.log(element)
+                lista.querySelector('#tipo').innerHTML = element.tipo
 
                 tableFrota.appendChild(lista);
             })
@@ -48,11 +46,13 @@ function cadastrarFrota() {
     const inpPlaca = document.querySelector('.inpPlaca')
     const inpModelo = document.querySelector('.inpModelo')
     const inpMarca = document.querySelector('.inpMarca')
+    const inpTipo = document.querySelector('.tipoVeiculo')
 
     const dados = {
         modelo: inpModelo.value,
         marca: inpMarca.value,
-        placa: inpPlaca.value
+        placa: inpPlaca.value,
+        tipo: inpTipo.value
     }
 
     const options = {
@@ -67,7 +67,8 @@ function cadastrarFrota() {
     fetch('http://localhost:3000/createVeiculo', options)
         .then(response => {
             console.log(response)
-            window.location.reload()
+            // window.location.reload()
+            return response.json()
         })
         .then(res => console.log(res))
 }

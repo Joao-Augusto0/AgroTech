@@ -24,18 +24,18 @@ function listarServico() {
                     timeZone: "UTC",
                 });
 
-                // lista.querySelector('#id').innerHTML = "id: " + element.id
-                lista.querySelector('#data_saida').innerHTML = "data_saida: " + dataFormatada
                 if (element.data_retorno == null) {
-                    lista.querySelector('#data_retorno').innerHTML = "data_retorno: " + 'ainda não retornou'
+                    lista.querySelector('#data_retorno').innerHTML = "Em Serviço"
                 } else {
-                    lista.querySelector('#data_retorno').innerHTML = "data_retorno: " + dataFormatada2
+                    lista.querySelector('#data_retorno').innerHTML = dataFormatada2
                 }
-                lista.querySelector('#descricao').innerHTML = "descrição: " + element.descricao
-                lista.querySelector('#id_motorista').innerHTML = "id_motorista: " + element.id_motorista
-                lista.querySelector('#id_veiculo').innerHTML = "id_veiculo: " + element.id_veiculo
+                lista.querySelector('#data_saida').innerHTML = dataFormatada
+                lista.querySelector('#descricao').innerHTML = element.descricao
+                lista.querySelector('#CPF').innerHTML = element.motorista.cpf
+                lista.querySelector('#Placa').innerHTML = element.veiculo.placa
 
                 tableServico.appendChild(lista);
+
             })
         })
 }

@@ -2,11 +2,20 @@ const { PrismaClient } = require('@prisma/client')
 
 const prisma = new PrismaClient()
 
-const create = async (req, res, next) => {
-    let motorista = await prisma.motorista.create({
-        data: req.body
-    })
-    res.status(201).end()
+const create = async (req, res) => {
+    if (req.body.nome.length > 0 && req.body.cpf.length > 0 && req.body.cnh.length > 0) {
+        try {
+            let motorista = await prisma.motorista.create({
+                data: req.body
+            })
+            res.status(201).json(motorista).end()
+        } catch (error) {
+            res.status(400).json(error).end()
+        }
+    } else {
+        res.status(400).json({ 'erro': 'campo vazio' }).end()
+    }
+
 }
 
 const read = async (req, res) => {

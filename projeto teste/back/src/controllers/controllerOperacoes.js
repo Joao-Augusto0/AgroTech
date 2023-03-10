@@ -64,15 +64,19 @@ const read = async (req, res) => {
             data_saida: true,
             data_retorno: true,
             descricao: true,
-            id_motorista: true,
-            id_veiculo: true,
             veiculo: {
                 select: {
+                    placa:true,
                     Manutencao: {
                         select: {
                             descricao: true
                         }
                     }
+                }
+            },
+            motorista:{
+                select:{
+                    cpf:true
                 }
             }
         }

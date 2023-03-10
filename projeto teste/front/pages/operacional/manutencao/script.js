@@ -24,7 +24,6 @@ function listarManutecoes() {
                     timeZone: "UTC",
                 });
 
-                // lista.querySelector('#id').innerHTML = element.id
                 lista.querySelector('#descricao').innerHTML = element.descricao
                 lista.querySelector('#valor').innerHTML = element.valor
                 lista.querySelector('#data_inicio').innerHTML = dataFormatada
@@ -33,7 +32,7 @@ function listarManutecoes() {
                 } else {
                     lista.querySelector('#data_fim').innerHTML = dataFormatada2
                 }
-                lista.querySelector('#id_veiculo').innerHTML =  element.id_veiculo
+                lista.querySelector('#placa').innerHTML = element.veiculo.placa
 
                 tableManutencao.appendChild(lista);
             })

@@ -7,30 +7,38 @@
 }
 
 .servico {
-    height: 80%;
+    width: 100%;
+    margin-top:20px;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
-.table-servico {
-    width: 100%;
-    height: 80%;
+.scroll{
+    background-color: white;
+    height: 75vh;
+    width: 80%;
+    display: flex;
+    justify-content: center;
     overflow-y: scroll;
     scroll-behavior: smooth;
+    font-size: 1.7em;
+    padding: 20px;
 }
 
-.itens-servico {
-    background-color: rgb(255, 255, 255);
-    height: 15%;
-    width: 90%;
-    margin: 10px;
-    position: relative;
-    border: solid 1px black;
-    margin-left: 5%;
-    font-size: 23px;
-    display: flex;
-    align-items:center ;
-    justify-content: space-around;
+table {
+    width: 100%;
+    text-align: center;
+    min-height: 500px;
+}
+
+
+th,
+td {
+    padding: 10px;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    align-items: center;
 }
 
 .btn_exclui {

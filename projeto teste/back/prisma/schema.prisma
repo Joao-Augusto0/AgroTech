@@ -13,7 +13,7 @@ datasource db {
 model Usuario {
   id    Int    @id @default(autoincrement())
   nome  String
-  email String
+  email String @unique
   senha String
   role  String
 }
@@ -21,8 +21,8 @@ model Usuario {
 model Motorista {
   id_motorista Int       @id @default(autoincrement())
   nome         String
-  cpf          String
-  cnh          String
+  cpf          String    @unique
+  cnh          String    @unique
   ocupado      Boolean   @default(false) //0 está não esta ocupado e 1 esta ocupado
   Servico      Servico[]
 }
@@ -31,7 +31,7 @@ model Frota {
   id         Int          @id @default(autoincrement())
   modelo     String
   marca      String
-  placa      String
+  placa      String @unique
   tipo       String
   ocupado    Boolean      @default(false) //0 está não esta ocupado e 1 esta ocupado
   Servico    Servico[]

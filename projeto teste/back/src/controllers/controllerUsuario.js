@@ -58,6 +58,8 @@ const login = async (req, res) => {
                     res.status(404).json(err).end()
                 }
             })
+        }else{
+            res.status(404).json({ "result": "senha incorreta" }).end()
         }
     } else {
         res.status(404).json({ "result": "usuario não encontrado" }).end()

@@ -16,9 +16,9 @@ function listarMotoristas() {
         lista.classList.remove('model')
 
         // lista.querySelector('#id').innerHTML =  element.id_motorista
-        lista.querySelector('#nome').innerHTML =  element.nome
-        lista.querySelector('#cpf').innerHTML =  element.cpf
-        lista.querySelector('#cnh').innerHTML =  element.cnh
+        lista.querySelector('#nome').innerHTML = element.nome
+        lista.querySelector('#cpf').innerHTML = element.cpf
+        lista.querySelector('#cnh').innerHTML = element.cnh
 
         tableMoto.appendChild(lista);
       })
@@ -61,15 +61,29 @@ function cadastrarMotorista() {
     body: JSON.stringify(dados)
   };
 
-
-  console.log(inpCnh.value.length)
-
   fetch('http://localhost:3000/createMotorista', options)
     .then(response => {
-      console.log(response)
-      window.location.reload()
+      // window.location.reload()
+      return response.json()
     })
-    .then(res => console.log(res))
+    .then(res => {
+      if(res.erro){
+        document.getElementById("error-message").style.display = "block"
+        document.getElementById("error-message").innerHTML = "Campo Vazio"
+      }
+      if(res.meta.target === 'Motorista_cnh_key'){
+        document.getElementById("error-message").style.display = "block"
+        document.getElementById("error-message").innerHTML = "CNH Ja Existe"
+      }
+
+      if(res.meta.target === 'Motorista_cpf_key'){
+        document.getElementById("error-message").style.display = "block"
+        document.getElementById("error-message").innerHTML = "CPF Ja Existe"
+      }
+      
+
+      console.log(res.meta.target)
+    })
 }
 
 listarMotoristas()

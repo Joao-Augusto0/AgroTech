@@ -18,6 +18,7 @@ const read = async (req, res) => {
             marca: true,
             placa: true,
             ocupado: true,
+            tipo:true,
             Servico: {
                 select: {
                     data_saida: true,
