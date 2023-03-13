@@ -28,14 +28,12 @@ const create = async (req, res) => {
                     let manutencao = await prisma.manutencao.create({
                         data: info
                     })
-                    console.log(manutencao)
-                    if (manutencao) {
-                        Veiculo.updateIndisponivel(req.body.placa)
-                        Operacao.updateServico(veiculo)
-                    }
-                    res.status(201).end()
+                    Veiculo.updateIndisponivel(req.body.placa)
+                    Operacao.updateServico(veiculo)
+
+                    res.status(201).json(manutencao).end()
                 } catch (error) {
-                    res.status(400).send(error).end()
+                    res.status(400).send(error).end();
                 }
             } else {
                 res.status(400).send({ menssagem: 'veiculo ja esta em manutenção' }).end()
@@ -44,7 +42,7 @@ const create = async (req, res) => {
             res.status(400).send({ menssagem: 'veiculo não existe' })
         }
     } catch (error) {
-        res.status(400).send(error).end()
+        res.status(400).send({ error: 'erro2' }).end()
     }
 }
 

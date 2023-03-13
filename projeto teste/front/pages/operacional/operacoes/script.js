@@ -9,7 +9,6 @@ function listarServico() {
         .then(response => response.json())
         .then(res => {
             res.forEach(element => {
-                console.log(element)
 
                 var lista = itensServico.cloneNode(true)
                 lista.classList.remove('model')
@@ -114,11 +113,12 @@ function abrirModalAtualizacao(info) {
 
     let id = info.children[0].innerHTML
     let descricao = info.children[1].innerHTML
-    // let data_retorno = info.children[3].innerHTML
+    let data_saida = info.children[2].innerHTML
+    let data_retorno = info.children[3].innerHTML
     let cpf = info.children[4].innerHTML
     let placa = info.children[5].innerHTML
 
-    window.localStorage.setItem('Operações', JSON.stringify({ 'id': Number(id), 'cpf': cpf, "descrição": descricao, "placa": placa }));
+    window.localStorage.setItem('Operações', JSON.stringify({ 'id': Number(id), 'cpf': cpf, "descrição": descricao, "placa": placa, "retorno": data_retorno, "saida": data_saida }));
 
     const modalCadastro = document.querySelector('.atualizacao')
 
@@ -135,14 +135,56 @@ function fecharModalAtualizacao() {
 
 function atualizarOperação() {
 
+  
+
     let infoOperacoes = JSON.parse(localStorage.getItem("Operações"));
 
-    let descricao = document.querySelector('.atualizarDescricao')
-    console.log(infoOperacoes)
+    let atualizarDescricao = document.querySelector('.atualizarDescricao')
 
+    let dados = {
+        descricao: atualizarDescricao.value.trim()
+    }
+
+    if (dados.descricao.length == 0) {
+        dados.descricao = infoOperacoes.descrição
+    }
+
+    const options = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dados)
+    };
+
+    fetch(`http://localhost:3000/putOperacao/${infoOperacoes.id}`, options)
+        .then(response => {
+            console.log(response)
+            return response.json()
+        })
+        .then(res => console.log(res))
 }
 
 function finalizarOperacao() {
+
+    let data_retorno = new Date();
+
+let dados = {
+    data_retorno:data_retorno
+}
+    let infoOperacoes = JSON.parse(localStorage.getItem("Operações"));
+
+    const options = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dados)
+    };
+    
+
+    fetch(`http://localhost:3000/putOperacao/${infoOperacoes.id}`, options)
+    .then(response => {
+        console.log(response)
+        return response.json()
+    })
+    .then(res => console.log(res))
 
 }
 
