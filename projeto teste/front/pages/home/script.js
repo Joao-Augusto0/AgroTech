@@ -74,8 +74,8 @@ function listarDispo() {
                 var lista = linhaMoto.cloneNode(true)
                 lista.classList.remove('model')
 
-                // lista.querySelector('.id_motorista').innerHTML = e.id_motorista
                 lista.querySelector('.nome_motorista').innerHTML = e.nome
+                lista.querySelector('.cpf_motorista').innerHTML = e.cpf
                 if (e.Servico.length > 0) {
                     lista.querySelector('.situacao_motorista').innerHTML = 'em serviço'
                 } else if (e.Servico.length == 0) {
@@ -100,8 +100,8 @@ function listarFrota() {
                 var lista = itensVeiculo.cloneNode(true)
                 lista.classList.remove('model')
 
-                // lista.querySelector('.id_veiculo').innerHTML = e.id
                 lista.querySelector('.placa_veiculo').innerHTML = e.placa
+                lista.querySelector('.tipo_veiculo').innerHTML = e.tipo
                 if (e.Servico.length > 1 && e.Manutencao.length > 1) {
                     lista.querySelector('.situacao_veiculo').innerHTML = 'disponivel'
                 } else if (e.Manutencao.length == 1) {
@@ -137,8 +137,9 @@ function listarRelatorioManutencao() {
                 let dataFormatada2 = data2.toLocaleDateString("pt-BR", {
                     timeZone: "UTC",
                 });
+                console.log(e)
 
-                // lista.querySelector('.id_veiculo_manutencao').innerHTML = e.id_veiculo
+                lista.querySelector('.placa').innerHTML = e.placa
                 lista.querySelector('.descicao_manutenca').innerHTML = e.descricao
                 lista.querySelector('.data_inicio').innerHTML = dataFormatada
                 if (e.data_fim == null) {

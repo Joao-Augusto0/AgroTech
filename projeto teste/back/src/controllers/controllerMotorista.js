@@ -3,10 +3,13 @@ const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 
 const create = async (req, res) => {
-    if (req.body.nome.length > 0 && req.body.cpf.length > 0 && req.body.cnh.length > 0) {
+
+    let info = req.body 
+    info.cnh = Number(req.body.cnh)
+    if (info.nome.length > 0 && info.cpf.length > 0 && info.cnh != undefined) {
         try {
             let motorista = await prisma.motorista.create({
-                data: req.body
+                data: info
             })
             res.status(201).json(motorista).end()
         } catch (error) {
@@ -39,28 +42,40 @@ const read = async (req, res) => {
 }
 
 const update = async (req, res) => {
-    let motorista = await prisma.motorista.update({
-        where: {
-            id_motorista: Number(req.params.id)
-        },
-        data: req.body
-    })
-    res.status(200).json(motorista).end()
+    
+    try {
+        const motoristaIdCpf = {
+            id_motorista: Number(req.params.id),
+            cpf: req.params.cpf
+        }
+        let motorista = await prisma.motorista.update({
+    
+            where: {
+                id_motorista_cpf: motoristaIdCpf
+            },
+            data: req.body
+        })
+
+        res.status(200).send({menssagem:'Motorista Atualizado com sucesso'}).end()
+    } catch (error) {
+        res.status(400).send({error}).end()
+    }
+   
 }
 
-const updateDisponivel = async (id) => {
+const updateDisponivel = async (cpf) => {
     let motorista = await prisma.motorista.update({
         where: {
-            id_motorista: Number(id)
+            cpf: cpf
         },
         data: { ocupado: false }
     })
 }
 
-const updateIndisponivel = async (id) => {
+const updateIndisponivel = async (cpf) => {
     let motorista = await prisma.motorista.update({
         where: {
-            id_motorista: Number(id)
+            cpf: cpf
         },
         data: { ocupado: true }
     })

@@ -11,50 +11,54 @@ datasource db {
 }
 
 model Usuario {
-  id    Int    @id @default(autoincrement())
-  nome  String
-  email String @unique
-  senha String
-  role  String
+  id_usuario Int    @id @default(autoincrement())
+  nome       String
+  email      String @unique
+  senha      String
+  role       String
 }
 
 model Motorista {
-  id_motorista Int       @id @default(autoincrement())
+  id_motorista Int       @default(autoincrement())
   nome         String
   cpf          String    @unique
-  cnh          String    @unique
+  cnh          Int    @unique
   ocupado      Boolean   @default(false) //0 está não esta ocupado e 1 esta ocupado
   Servico      Servico[]
+
+  @@id([id_motorista, cpf])
 }
 
 model Frota {
-  id         Int          @id @default(autoincrement())
+  id_frota   Int          @default(autoincrement())
   modelo     String
   marca      String
-  placa      String @unique
+  placa      String       @unique
   tipo       String
   ocupado    Boolean      @default(false) //0 está não esta ocupado e 1 esta ocupado
   Servico    Servico[]
   Manutencao Manutencao[]
+
+  @@id([id_frota, placa])
 }
 
 model Servico {
-  id           Int       @id @default(autoincrement())
+  id_servico   Int       @id @default(autoincrement())
   data_saida   DateTime? @default(now())
   data_retorno DateTime?
   descricao    String
-  id_motorista Int
-  id_veiculo   Int
-  motorista    Motorista @relation(fields: [id_motorista], references: [id_motorista])
-  veiculo      Frota     @relation(fields: [id_veiculo], references: [id])
+  cpf          String
+  placa        String
+  motorista    Motorista @relation(fields: [cpf], references: [cpf])
+  veiculo      Frota     @relation(fields: [placa], references: [placa])
 }
 
 model Manutencao {
-  id          Int       @id @default(autoincrement())
-  descricao   String
-  valor       Float
-  data_inicio DateTime? @default(now())
-  data_fim    DateTime?
-  id_veiculo  Int
-  veiculo     Frota     @relation(fields: [id_veiculo], references: [id])
+  id_manutencao Int       @id @default(autoincrement())
+  descricao     String
+  valor         Float
+  data_inicio   DateTime? @default(now())
+  data_fim      DateTime?
+  placa         String
+  veiculo       Frota     @relation(fields: [placa], references: [placa])
 }

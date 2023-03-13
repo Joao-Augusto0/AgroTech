@@ -6,12 +6,12 @@ const prisma = new PrismaClient()
 
 const create = async (req, res) => {
 
-    if (req.body.descricao.length > 0 && req.body.id_motorista != undefined && req.body.id_veiculo != undefined) {
+    if (req.body.descricao.length > 0 && req.body.cpf.length > 0 && req.body.placa.length > 0) {
 
         try {
             let motorista = await prisma.motorista.findUnique({
                 where: {
-                    id_motorista: req.body.id_motorista
+                    cpf: req.body.cpf
                 },
                 select: {
                     ocupado: true,
@@ -34,7 +34,7 @@ const create = async (req, res) => {
         try {
             let veiculo = await prisma.frota.findUnique({
                 where: {
-                    id: req.body.id_veiculo
+                    placa: req.body.placa
                 },
                 select: {
                     ocupado: true,
@@ -59,11 +59,18 @@ const create = async (req, res) => {
         }
 
         let servico = await prisma.servico.create({
-            data: req.body
+            data: req.body,
+            select: {
+                veiculo: {
+                    select: {
+                        tipo: true
+                    }
+                }
+            }
         })
 
-        Veiculo.updateIndisponivel(req.body.id_veiculo)
-        Motorista.updateIndisponivel(req.body.id_motorista)
+        Veiculo.updateIndisponivel(req.body.placa)
+        Motorista.updateIndisponivel(req.body.cpf)
 
         res.status(200).json(servico).end()
     } else {
@@ -74,7 +81,7 @@ const create = async (req, res) => {
 const read = async (req, res) => {
     let servico = await prisma.servico.findMany({
         select: {
-            id: true,
+            id_servico: true,
             data_saida: true,
             data_retorno: true,
             descricao: true,
@@ -99,34 +106,25 @@ const read = async (req, res) => {
 }
 
 const update = async (req, res) => {
-    var info = req.body
-    let servico = await prisma.servico.update({
-        where: {
-            id: Number(req.params.id)
-        },
-        data: info
-    })
+    try {
 
-    if (info.data_retorno != null) {
-        Veiculo.updateDisponivel(req.body.id_veiculo)
-        Motorista.updateDisponivel(req.body.id_motorista)
-    }
-
-    res.status(200).json(servico).end()
-}
-
-const updateServico = async (info, req, res) => {
-    const timeElapsed = Date.now();
-
-    const today = new Date(timeElapsed);
-
-    if (info.Servico[0] != undefined) {
+        var info = req.body
         let servico = await prisma.servico.update({
             where: {
-                id: Number(info.Servico[0].id)
+                id_servico: Number(req.params.id)
             },
-            data: { descricao: "foi levado para manutenção", data_retorno: today }
+            data: info
         })
+
+        if (info.data_retorno != null) {
+            Veiculo.updateDisponivel(req.body.id_veiculo)
+            Motorista.updateDisponivel(req.body.id_motorista)
+        }
+
+        res.status(200).json(servico).end()
+
+    } catch (error) {
+        res.status(400).send({ error }).end()
     }
 }
 
@@ -146,5 +144,5 @@ module.exports = {
     read,
     update,
     del,
-    updateServico
+    // updateServico
 }

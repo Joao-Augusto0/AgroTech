@@ -12,7 +12,6 @@
 </head>
 
 <body>
-    <header></header>
     <main class="container">
         <aside class="aside">
             <div class="titulo">
@@ -56,13 +55,15 @@
                     <table class="table-motoristas">
                         <thead>
                             <tr>
+                                <th class="model">id</th>
                                 <th>Nome</th>
                                 <th>CPF</th>
                                 <th>CNH</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="itens-motorista model">
+                            <tr onclick="abrirModalAtualizacao(this)" class="itens-motorista model">
+                                <td id="id"></td>
                                 <td id="nome"></td>
                                 <td id="cpf"></td>
                                 <td id="cnh"></td>
@@ -73,7 +74,8 @@
                 </div>
             </div>
         </div>
-        <div class="modal-container">
+
+        <div class="modal-container cadastro">
             <div class="modal">
                 <button onclick="fecharModalCadastro()" class="fechar">x</button>
                 <h3>Cadastro de Motorista</h3>
@@ -84,6 +86,22 @@
                         <input required class="inpCnh" placeholder="cnh" type="text">
                     </form>
                     <button onclick="cadastrarMotorista()" class="mdbtn">confirmar</button>
+                    <div id="error-message" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-container update">
+            <div class="modal">
+                <button onclick="fecharModalAtualizacao()" class="fechar">x</button>
+                <h3>Atualizar Motorista</h3>
+                <div class="formulario-cadastro">
+                    <form rm action="">
+                        <input required class="atualizarNome" placeholder="nome" type="text">
+                        <input required class="atualizarCpf" placeholder="cpf" type="text">
+                        <input required class="atualizarCnh" placeholder="cnh" type="text">
+                    </form>
+                    <button onclick="update()" class="mdbtn">confirmar</button>
                     <div id="error-message" style="display: none;"></div>
                 </div>
             </div>

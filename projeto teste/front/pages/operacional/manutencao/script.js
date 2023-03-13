@@ -10,6 +10,7 @@ function listarManutecoes() {
         .then(res => {
             console.log(res)
             res.forEach(element => {
+                console.log(element)
 
                 var lista = itensManutencao.cloneNode(true)
                 lista.classList.remove('model')
@@ -32,7 +33,7 @@ function listarManutecoes() {
                 } else {
                     lista.querySelector('#data_fim').innerHTML = dataFormatada2
                 }
-                lista.querySelector('#placa').innerHTML = element.veiculo.placa
+                lista.querySelector('#placa').innerHTML = element.placa
 
                 tableManutencao.appendChild(lista);
             })
@@ -78,7 +79,7 @@ function cadastrarManutencao() {
     fetch('http://localhost:3000/createManutencao', options)
         .then(response => {
             console.log(response)
-            window.location.reload()
+            // window.location.reload()
         })
         .then(res => console.log(res))
 }

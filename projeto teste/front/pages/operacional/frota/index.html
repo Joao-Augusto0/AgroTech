@@ -55,6 +55,7 @@
                     <table class="table-frota">
                         <thead>
                             <tr>
+                                <th class="model">Id</th>
                                 <th>Placa</th>
                                 <th>Modelo</th>
                                 <th>Marca</th>
@@ -62,7 +63,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="itens-frota model">
+                            <tr onclick="abrirModalAtualizar(this)" class="itens-frota model">
+                                <td id="id"></td>
                                 <td id="placa"></td>
                                 <td id="modelo"></td>
                                 <td id="marca"></td>
@@ -73,7 +75,7 @@
                     <button class="btn_exclui">x</button>
                 </div>
             </div>
-            <div class="modal-container">
+            <div class="modal-container cadastro">
                 <div class="modal">
                     <button onclick="fecharModalCadastro()" class="fechar">x</button>
                     <h3>Cadastro de Veiculo</h3>
@@ -90,6 +92,26 @@
                         </form>
                         <button onclick="cadastrarFrota()" class="mdbtn">confirmar</button>
                         <div id="error-message" style="display: none;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-container atualizacao">
+                <div class="modal">
+                    <button onclick="fecharModalAtualizar()" class="fechar">x</button>
+                    <h3>atualizar Veiculo</h3>
+                    <div class="formulario-cadastro">
+                        <form action="">
+                            <input required class="atualizarPlaca" placeholder="Placa" type="text">
+                            <input required class="atualizarModelo" placeholder="Modelo" type="text">
+                            <input required class="atualizarMarca" placeholder="Marca" type="text">
+                            <select required placeholder="tipo" class="atualizarTipo" name="" id="">
+                                <option value="Carga">Carga</option>
+                                <option value="Visita">Visita</option>
+                                <option value="Vendas">Vendas</option>
+                            </select>
+                        </form>
+                        <button onclick="atualizarFrota()" class="mdbtn">confirmar</button>
+                        <div id="err-message" style="display: none;"></div>
                     </div>
                 </div>
             </div>

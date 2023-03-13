@@ -6,41 +6,57 @@ const Operacao = require('../controllers/controllerOperacoes')
 const prisma = new PrismaClient()
 
 const create = async (req, res) => {
-    let veiculo = await prisma.frota.findUnique({
-        where: {
-            id: req.body.id_veiculo
-        },
-        select: {
-            ocupado: true,
-            Servico: true,
-            id: true
+
+    try {
+        let veiculo = await prisma.frota.findUnique({
+            where: {
+                placa: req.body.placa
+            },
+            select: {
+                ocupado: true,
+                Servico: true,
+                id_frota: true,
+                placa: true,
+                Manutencao: true
+            }
+        })
+        if (veiculo) {
+            if (veiculo.Manutencao.length == 0) {
+                try {
+                    let info = req.body
+                    info.valor = Number(req.body.valor)
+                    let manutencao = await prisma.manutencao.create({
+                        data: info
+                    })
+                    console.log(manutencao)
+                    if (manutencao) {
+                        Veiculo.updateIndisponivel(req.body.placa)
+                        Operacao.updateServico(veiculo)
+                    }
+                    res.status(201).end()
+                } catch (error) {
+                    res.status(400).send(error).end()
+                }
+            } else {
+                res.status(400).send({ menssagem: 'veiculo ja esta em manutenção' }).end()
+            }
+        } else {
+            res.status(400).send({ menssagem: 'veiculo não existe' })
         }
-    })
-
-    var info = req.body
-    info.id_veiculo = Number(req.body.id_veiculo)
-    let manutencao = await prisma.manutencao.create({
-        data: info
-    })
-
-    Operacao.updateServico(veiculo)
-    res.status(201).end()
+    } catch (error) {
+        res.status(400).send(error).end()
+    }
 }
 
 const read = async (req, res) => {
     let manutencao = await prisma.manutencao.findMany({
         select: {
-            id: true,
+            id_manutencao: true,
             descricao: true,
             valor: true,
             data_inicio: true,
             data_fim: true,
-            id_veiculo: true,
-            veiculo: {
-                select: {
-                    placa: true
-                }
-            }
+            placa: true
         }
     })
     res.status(200).json(manutencao).end()
@@ -51,13 +67,13 @@ const update = async (req, res) => {
     info.valor = Number(req.body.valor)
     let manutencao = await prisma.manutencao.update({
         where: {
-            id: Number(req.params.id)
+            id_manutencao: Number(req.params.id)
         },
         data: info
     })
 
     if (info.data_fim != null) {
-        Veiculo.updateDisponivel(req.body.id_veiculo)
+        Veiculo.updateDisponivel(req.body.placa)
     }
 
     res.status(200).json(manutencao).end()
@@ -68,7 +84,6 @@ const updateManutencaoServico = async () => {
     let manutencao = await prisma.manutencao.update({
         data: { descricao: 'em manutenção' }
     })
-    console.log(Operacao.updateServico(req.params.id))
 
 
     res.status(200).json(manutencao).end()
@@ -78,7 +93,7 @@ const updateManutencaoServico = async () => {
 const del = async (req, res) => {
     let manutencao = await prisma.manutencao.delete({
         where: {
-            id: Number(req.params.id)
+            id_manutencao: Number(req.params.id)
         }
     })
     res.status(200).json(manutencao).end()

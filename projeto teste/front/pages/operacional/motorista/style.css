@@ -1,5 +1,5 @@
 .moto {
-    background-color:  #00B4D8;
+    background-color: #00B4D8;
 }
 
 .dash {
@@ -8,7 +8,7 @@
 
 .motoristas {
     width: 100%;
-    margin-top:20px;
+    margin-top: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -50,16 +50,23 @@ td {
     right: 0;
     border: none;
     border-radius: 10px;
-    background-color:transparent;
+    background-color: transparent;
 }
 
-.btn_exclui:hover{
+.btn_exclui:hover {
     cursor: pointer;
 }
 
 .itens-motorista>p {
     margin-left: 10px;
     margin-top: 5px;
+}
+
+.itens-motorista:hover {
+    background-color: rgb(191, 191, 191);
+    transition: transform 1s;
+    transform: translateX(5px) scale(1.0);
+    cursor: pointer;
 }
 
 .model {
@@ -121,7 +128,7 @@ form {
     border: none;
     position: absolute;
     top: 0;
-    left:96%;
+    left: 96%;
     font-size: 20px;
     background-color: transparent;
     color: red;
@@ -131,7 +138,7 @@ form {
     cursor: pointer;
 }
 
-input{
+input {
     margin: 10px;
     border: none;
     border-bottom: 1px solid black;
@@ -139,20 +146,20 @@ input{
     outline: none;
 }
 
-h3{
+h3 {
     margin-top: 5%;
 }
 
-mdbtn{
+mdbtn {
     height: 45px;
     width: 150px;
     margin-top: 40px;
     position: absolute;
-   
+
 }
 
 #error-message {
     color: red;
     font-weight: bold;
     margin-bottom: 10px;
-  }
+}

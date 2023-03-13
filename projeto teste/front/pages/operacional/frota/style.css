@@ -14,6 +14,13 @@
     justify-content: center;
 }
 
+.itens-frota:hover{
+    background-color: rgb(191, 191, 191);
+    transition: transform 1s;
+    transform: translateX(5px) scale(1.0);
+    cursor: pointer;
+}
+
 .scroll {
     background-color: white;
     height: 75vh;
@@ -146,11 +153,11 @@ h3{
     margin-top: 5%;
 }
 
-mdbtn{
+/* .mdbtn{
     height: 45px;
     width: 150px;
     position: absolute;
-}
+} */
 
 #error-message {
     color: red;

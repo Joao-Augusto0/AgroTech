@@ -9,6 +9,7 @@ function listarServico() {
         .then(response => response.json())
         .then(res => {
             res.forEach(element => {
+                console.log(element)
 
                 var lista = itensServico.cloneNode(true)
                 lista.classList.remove('model')
@@ -33,6 +34,8 @@ function listarServico() {
                 lista.querySelector('#descricao').innerHTML = element.descricao
                 lista.querySelector('#CPF').innerHTML = element.motorista.cpf
                 lista.querySelector('#Placa').innerHTML = element.veiculo.placa
+                lista.querySelector('#id').innerHTML = element.id_servico
+                lista.querySelector('#id').classList.add('model')
 
                 tableServico.appendChild(lista);
 
@@ -41,13 +44,13 @@ function listarServico() {
 }
 
 function abrirModalCadastro() {
-    const modalCadastro = document.querySelector('.modal-container')
+    const modalCadastro = document.querySelector('.cadastro')
 
     modalCadastro.classList.add('mostrar')
 }
 
 function fecharModalCadastro() {
-    const modalCadastro = document.querySelector('.modal-container')
+    const modalCadastro = document.querySelector('.cadastro')
 
     modalCadastro.classList.remove('mostrar')
 }
@@ -57,16 +60,13 @@ function cadastrarServico() {
     let usuario = JSON.parse(localStorage.getItem("user"));
 
     const inpDescricao = document.querySelector('.inpDescricao')
-    const inpIdMoto = document.querySelector('.inpIdMotorista')
-    const inpIdVei = document.querySelector('.inpIdVeiculo')
-
-    let idMoto = Number(inpIdMoto.value)
-    let idVei = Number(inpIdVei.value)
+    const inpCpf = document.querySelector('.inpCpf')
+    const inpPlaca = document.querySelector('.inpPlaca')
 
     const dados = {
         descricao: inpDescricao.value,
-        id_motorista: idMoto,
-        id_veiculo: idVei
+        cpf: inpCpf.value,
+        placa: inpPlaca.value
     }
 
     const options = {
@@ -84,20 +84,66 @@ function cadastrarServico() {
         })
         .then(res => {
 
-            console.log(res.menssagem)
+            console.log(res)
+
+            // if (res.veiculo.tipo === 'Visita' && (dados.descricao.includes('Carga') || dados.descricao.includes('Vendas'))) {
+            //     document.getElementById("error-message").style.display = "block"
+            //     document.getElementById("error-message").innerHTML = 'Esse veiculo não serve para esse serviço'
+            // }
+
+            // if (res.veiculo.tipo === 'Carga' && (dados.descricao.includes('Visita') || dados.descricao.includes('Vendas'))) {
+            //     document.getElementById("error-message").style.display = "block"
+            //     document.getElementById("error-message").innerHTML = 'Esse veiculo não serve para esse serviço'
+            // }
+
+            // if (res.veiculo.tipo === 'Vendas' && (dados.descricao.includes('Visita') || dados.descricao.includes('Carga'))) {
+            //     document.getElementById("error-message").style.display = "block"
+            //     document.getElementById("error-message").innerHTML = 'Esse veiculo não serve para esse serviço'
+            // }
+
             if (res.menssagem) {
                 document.getElementById("error-message").style.display = "block"
                 document.getElementById("error-message").innerHTML = res.menssagem
             } else {
                 window.location.reload()
             }
-
         })
+}
+
+function abrirModalAtualizacao(info) {
+
+    let id = info.children[0].innerHTML
+    let descricao = info.children[1].innerHTML
+    // let data_retorno = info.children[3].innerHTML
+    let cpf = info.children[4].innerHTML
+    let placa = info.children[5].innerHTML
+
+    window.localStorage.setItem('Operações', JSON.stringify({ 'id': Number(id), 'cpf': cpf, "descrição": descricao, "placa": placa }));
+
+    const modalCadastro = document.querySelector('.atualizacao')
+
+    modalCadastro.classList.add('mostrar')
+}
+
+function fecharModalAtualizacao() {
+    const modalCadastro = document.querySelector('.atualizacao')
+
+    modalCadastro.classList.remove('mostrar')
+}
+
+
+
+function atualizarOperação() {
+
+    let infoOperacoes = JSON.parse(localStorage.getItem("Operações"));
+
+    let descricao = document.querySelector('.atualizarDescricao')
+    console.log(infoOperacoes)
 
 }
 
-// function atualizarOperação() {
+function finalizarOperacao() {
 
-// }
+}
 
 listarServico()

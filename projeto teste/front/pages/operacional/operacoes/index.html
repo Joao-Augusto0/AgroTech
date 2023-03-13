@@ -56,6 +56,7 @@
                     <table class="table-servico">
                         <thead>
                             <tr>
+                                <th class="model">ID</th>
                                 <th>Descrição</th>
                                 <th>Saida</th>
                                 <th>Retorno</th>
@@ -64,7 +65,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="itens-servico model">
+                            <tr onclick="abrirModalAtualizacao(this)" class="itens-servico model">
+                                <td id="id"></td>
                                 <td id="descricao"></td>
                                 <td id="data_saida"></td>
                                 <td id="data_retorno"></td>
@@ -76,17 +78,32 @@
                     <button class="btn_exclui">x</button>
                 </div>
             </div>
-            <div class="modal-container">
+            <div class="modal-container cadastro">
                 <div class="modal">
                     <button onclick="fecharModalCadastro()" class="fechar">x</button>
-                    <h3>Cadastro de Veiculo</h3>
+                    <h3>Cadastro de Operações</h3>
                     <div class="formulario-cadastro">
                         <form action="">
                             <input required class="inpDescricao" placeholder="Descrição" type="text">
-                            <input required class="inpIdMotorista" placeholder="id_Motorista" type="text">
-                            <input required class="inpIdVeiculo" placeholder="id_veiculo" type="text">
+                            <input required class="inpCpf" placeholder="CPF" type="text">
+                            <input required class="inpPlaca" placeholder="Placa" type="text">
                         </form>
                         <button onclick="cadastrarServico()" class="mdbtn">confirmar</button>
+                        <div id="error-message" style="display: none;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-container atualizacao">
+                <div class="modal">
+                    <button onclick="fecharModalAtualizacao()" class="fechar">x</button>
+                    <h3>Atualizar Operações</h3>
+                    <div class="formulario-cadastro">
+                        <form action="">
+                            <input required class="atualizarDescricao" placeholder="Descrição" type="text">
+                        </form>
+                        <button onclick="atualizarOperação()" class="mdbtn">confirmar</button>
+                        <button onclick="finalizarOperacao()" class="mdbtn">finalizar Operação</button>
                         <div id="error-message" style="display: none;"></div>
                     </div>
                 </div>
