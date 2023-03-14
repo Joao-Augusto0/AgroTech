@@ -12,7 +12,6 @@
 </head>
 
 <body>
-    <header></header>
     <main class="container">
         <aside class="aside">
             <div class="titulo">
@@ -44,10 +43,10 @@
         <div class="dash">
             <header class="topo-main">
                 <div class="busca"><img class="lupa" src="https://cdn-icons-png.flaticon.com/512/149/149852.png"
-                        alt=""><input class="filtro" placeholder="pesquise" type="text"></div>
+                        alt=""><input onkeyup="filterTable()" class="filtro" placeholder="pesquise" type="text"></div>
                 <div class="dados-perfil">
-                    <p>nome:</p>
-                    <p>role:</p>
+                    <p id="nomeUser"></p>
+                    <p id="roleUser"></p>
                 </div>
             </header>
             <div class="servico">
@@ -101,7 +100,7 @@
                     <div class="formulario-cadastro">
                         <form action="">
                             <input required class="atualizarDescricao" placeholder="Descrição" type="text">
-                            <input required class="atualizarRetorno" placeholder="Descrição" type="text">
+                            <input class="model" required class="atualizarRetorno" placeholder="Descrição" type="text">
                         </form>
                         <button onclick="atualizarOperação()" class="mdbtn">confirmar</button>
                         <button onclick="finalizarOperacao()" class="mdbtn">finalizar Operação</button>

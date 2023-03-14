@@ -2,6 +2,14 @@ const tableServico = document.querySelector('.table-servico')
 
 const itensServico = document.querySelector('.itens-servico')
 
+function user() {
+
+    let usuario = JSON.parse(localStorage.getItem("user"));
+
+    document.getElementById("nomeUser").innerHTML = usuario.nome
+    document.getElementById("roleUser").innerHTML = usuario.role
+}
+
 function listarServico() {
     const options = { method: 'GET' };
 
@@ -63,9 +71,9 @@ function cadastrarServico() {
     const inpPlaca = document.querySelector('.inpPlaca')
 
     const dados = {
-        descricao: inpDescricao.value,
-        cpf: inpCpf.value,
-        placa: inpPlaca.value
+        descricao: inpDescricao.value.trim(),
+        cpf: inpCpf.value.trim(),
+        placa: inpPlaca.value.trim()
     }
 
     const options = {
@@ -82,23 +90,6 @@ function cadastrarServico() {
             return response.json()
         })
         .then(res => {
-
-            console.log(res)
-
-            // if (res.veiculo.tipo === 'Visita' && (dados.descricao.includes('Carga') || dados.descricao.includes('Vendas'))) {
-            //     document.getElementById("error-message").style.display = "block"
-            //     document.getElementById("error-message").innerHTML = 'Esse veiculo não serve para esse serviço'
-            // }
-
-            // if (res.veiculo.tipo === 'Carga' && (dados.descricao.includes('Visita') || dados.descricao.includes('Vendas'))) {
-            //     document.getElementById("error-message").style.display = "block"
-            //     document.getElementById("error-message").innerHTML = 'Esse veiculo não serve para esse serviço'
-            // }
-
-            // if (res.veiculo.tipo === 'Vendas' && (dados.descricao.includes('Visita') || dados.descricao.includes('Carga'))) {
-            //     document.getElementById("error-message").style.display = "block"
-            //     document.getElementById("error-message").innerHTML = 'Esse veiculo não serve para esse serviço'
-            // }
 
             if (res.menssagem) {
                 document.getElementById("error-message").style.display = "block"
@@ -129,13 +120,15 @@ function fecharModalAtualizacao() {
     const modalCadastro = document.querySelector('.atualizacao')
 
     modalCadastro.classList.remove('mostrar')
+
+    localStorage.removeItem("Operações");
 }
 
 
 
 function atualizarOperação() {
 
-  
+    let usuario = JSON.parse(localStorage.getItem("user"));
 
     let infoOperacoes = JSON.parse(localStorage.getItem("Operações"));
 
@@ -151,41 +144,98 @@ function atualizarOperação() {
 
     const options = {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json',
+            authorization: usuario.token
+        },
         body: JSON.stringify(dados)
     };
 
     fetch(`http://localhost:3000/putOperacao/${infoOperacoes.id}`, options)
         .then(response => {
             console.log(response)
+            if (response.status == 200) {
+                window.location.reload()
+            }
             return response.json()
+
         })
         .then(res => console.log(res))
 }
 
 function finalizarOperacao() {
 
+    let usuario = JSON.parse(localStorage.getItem("user"));
+
     let data_retorno = new Date();
 
-let dados = {
-    data_retorno:data_retorno
-}
+    let dados = {
+        data_retorno: data_retorno
+    }
+
     let infoOperacoes = JSON.parse(localStorage.getItem("Operações"));
 
     const options = {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json',
+            authorization: usuario.token
+        },
         body: JSON.stringify(dados)
     };
-    
+
 
     fetch(`http://localhost:3000/putOperacao/${infoOperacoes.id}`, options)
-    .then(response => {
-        console.log(response)
-        return response.json()
-    })
-    .then(res => console.log(res))
-
+        .then(response => {
+            console.log(response)
+            if (response.status == 200) {
+                window.location.reload()
+            }
+            return response.json()
+        })
+        .then(res => console.log(res))
 }
 
-listarServico()
+
+function filterTable() {
+    // Captura o valor do input de busca
+    let busca, filter, table, tr, td, i, txtValue;
+
+    busca = document.querySelector('.filtro')
+    filter = busca.value.toUpperCase();
+
+    // Captura a tabela e as linhas
+    table = document.querySelector('.table-servico')
+    tr = table.getElementsByTagName("tr");
+
+
+    // Loop através de todas as linhas da tabela e esconde as que não correspondem ao filtro
+    for (i = 0; i < tr.length; i++) {
+        // Captura as células da linha
+        td = tr[i].getElementsByTagName("td");
+        // Loop através de todas as células e verifica se o valor corresponde ao filtro
+        for (j = 0; j < td.length; j++) {
+            txtValue = td[j].textContent || td[j].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+                break;
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+const sair = document.querySelector('.btn-sair')
+
+sair.addEventListener('click', function () {
+    localStorage.clear();
+    window.location.href = "../../login/login.html"
+})
+
+function carregar() {
+    user()
+    listarServico()
+}
+
+carregar()

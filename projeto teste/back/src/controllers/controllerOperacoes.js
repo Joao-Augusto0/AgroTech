@@ -117,7 +117,6 @@ const update = async (req, res) => {
             data: info
         })
 
-        console.log(servico)
         if (servico.data_retorno != null) {
             Veiculo.updateDisponivel(servico.placa)
             Motorista.updateDisponivel(servico.cpf)
@@ -130,15 +129,21 @@ const update = async (req, res) => {
     }
 }
 
- const updateServico = async (info) => {
+ const updateServico = async (info,req,res) => {
     const data = new Date();
 
-    let servico = await prisma.servico.update({
-        where:{
-            id_servico: info.Servico[0].id_servico
-        },
-        data:{data_retorno:data,descricao:'Levado para manutenção'}
-    })
+    try {
+        let servico = await prisma.servico.update({
+            where:{
+                id_servico: info.Servico[0].id_servico
+            },
+            data:{data_retorno:data,descricao:'Levado para manutenção'}
+        })
+    } catch (error) {
+        res.status(400).send(error).end()
+    }
+
+    
  }
 
 

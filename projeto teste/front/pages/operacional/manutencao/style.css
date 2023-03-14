@@ -34,6 +34,13 @@
     padding: 20px;
 }
 
+.itens-manutencao:hover{
+    background-color: rgb(191, 191, 191);
+    transition: transform 1s;
+    transform: translateX(5px) scale(1.0);
+    cursor: pointer;
+}
+
 table {
     width: 100%;
     min-height: 600px;
@@ -144,7 +151,6 @@ select {
 }
 
 input {
-    margin: 10px;
     border: none;
     border-bottom: 1px solid black;
     background-color: transparent;
@@ -159,4 +165,10 @@ mdbtn {
     height: 45px;
     width: 150px;
     position: absolute;
+}
+
+#error-message {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 10px;
 }

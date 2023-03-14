@@ -43,10 +43,10 @@
         <div class="dash">
             <header class="topo-main">
                 <div class="busca"><img class="lupa" src="https://cdn-icons-png.flaticon.com/512/149/149852.png"
-                        alt=""><input class="filtro" placeholder="pesquise" type="text"></div>
+                        alt=""><input onkeyup="filterTable()" class="filtro" placeholder="pesquise" type="text"></div>
                 <div class="dados-perfil">
-                    <p>nome:</p>
-                    <p>role:</p>
+                    <p id="nomeUser"></p>
+                    <p id="roleUser"></p>
                 </div>
             </header>
             <div class="frota">

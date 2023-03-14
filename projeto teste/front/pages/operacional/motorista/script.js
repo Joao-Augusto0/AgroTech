@@ -2,7 +2,14 @@ const tableMoto = document.querySelector('.table-motoristas')
 
 const itensMoto = document.querySelector('.itens-motorista')
 
-// listar por filtro com os dados do motorista
+function user() {
+
+  let usuario = JSON.parse(localStorage.getItem("user"));
+
+  document.getElementById("nomeUser").innerHTML = usuario.nome
+  document.getElementById("roleUser").innerHTML = usuario.role
+}
+
 
 function listarMotoristas() {
   const options = { method: 'GET' };
@@ -47,12 +54,6 @@ function cadastrarMotorista() {
   const inpCpf = document.querySelector('.inpCpf')
   const inpCnh = document.querySelector('.inpCnh')
 
-
-  // let cpfFormatado = inpCpf.value
-
-  // cpfFormatado.slice(0, 3) + '.' + cpfFormatado.slice(3, 6) + '.' + cpfFormatado.slice(6, 9) + '-' + cpfFormatado.slice(9);
-
-
   const dados = {
     nome: inpNome.value.trim(),
     cpf: inpCpf.value.trim(),
@@ -90,12 +91,7 @@ function cadastrarMotorista() {
         document.getElementById("error-message").innerHTML = "CPF Ja Existe"
       }
     })
-
-
-
 }
-
-
 
 function abrirModalAtualizacao(dados) {
 
@@ -114,6 +110,8 @@ function fecharModalAtualizacao() {
   const modalCadastro = document.querySelector('.update')
 
   modalCadastro.classList.remove('mostrar')
+
+  localStorage.removeItem("Motorista");
 }
 
 function update() {
@@ -163,4 +161,47 @@ function update() {
 }
 
 
-listarMotoristas()
+function filterTable() {
+  // Captura o valor do input de busca
+  let busca, filter, table, tr, td, i, txtValue;
+
+  busca = document.querySelector('.filtro')
+  filter = busca.value.toUpperCase();
+
+  // Captura a tabela e as linhas
+  table = document.querySelector('.table-motoristas')
+  tr = table.getElementsByTagName("tr");
+
+
+  // Loop através de todas as linhas da tabela e esconde as que não correspondem ao filtro
+  for (i = 0; i < tr.length; i++) {
+    // Captura as células da linha
+    td = tr[i].getElementsByTagName("td");
+    // Loop através de todas as células e verifica se o valor corresponde ao filtro
+    for (j = 0; j < td.length; j++) {
+      txtValue = td[j].textContent || td[j].innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+        break;
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+
+
+const sair = document.querySelector('.btn-sair')
+
+sair.addEventListener('click', function () {
+  localStorage.clear();
+  window.location.href = "../../login/login.html"
+})
+
+
+function carregar(){
+  listarMotoristas()
+  user()
+}
+
+carregar()  

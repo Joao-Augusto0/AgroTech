@@ -82,7 +82,7 @@
 .modal {
     background-color: aliceblue;
     height: 90%;
-    width: 60%;
+    width: 90%;
     min-width: 300px;
     border: 1px solid black;
     position: relative;
@@ -110,14 +110,14 @@
 }
 
 .relatorio-dispo-moto {
-    width: 40%;
+    width: 50%;
     height: 40%;
     overflow-y: scroll;
     scroll-behavior: smooth;
 }
 
 .relatorio-dispo-veiculo {
-    width: 40%;
+    width: 50%;
     height: 40%;
     overflow-y: scroll;
     scroll-behavior: smooth;
@@ -158,7 +158,7 @@ td {
     scroll-behavior: smooth;
 }
 
-.relManu{
+.relManu {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -173,7 +173,7 @@ td {
     scroll-behavior: smooth;
 }
 
-.relAloca{
+.relAloca {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -183,3 +183,26 @@ h3 {
     margin: 3vh;
 }
 
+.graficos {
+    display: flex;
+    height: 49%;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+.grafico-dispo-motorista {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.grafico-dispo-frota {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

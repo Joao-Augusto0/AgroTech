@@ -44,10 +44,10 @@
         <div class="dash">
             <header class="topo-main">
                 <div class="busca"><img class="lupa" src="https://cdn-icons-png.flaticon.com/512/149/149852.png"
-                        alt=""><input class="filtro" placeholder="pesquise" type="text"></div>
+                        alt=""><input onkeyup="filterTable()" class="filtro" placeholder="pesquise" type="text"></div>
                 <div class="dados-perfil">
-                    <p>nome:</p>
-                    <p>role:</p>
+                    <p id="nomeUser"></p>
+                    <p id="roleUser"></p>
                 </div>
             </header>
             <div class="manutencao">
@@ -56,6 +56,7 @@
                     <table class="table-manutencao">
                         <thead>
                             <tr>
+                                <th class="model">id</th>
                                 <th>Descrição</th>
                                 <th>Valor</th>
                                 <th>Data Inicio</th>
@@ -64,7 +65,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="itens-manutencao model">
+                            <tr onclick="abrirModalAtualizacao(this)" class="itens-manutencao model">
+                                <td id="id"></td>
                                 <td id="descricao"></td>
                                 <td id="valor"></td>
                                 <td id="data_inicio"></td>
@@ -77,17 +79,34 @@
                     <button class="btn_exclui">x</button>
                 </div>
             </div>
-            <div class="modal-container">
+            <div class="modal-container cadastro">
                 <div class="modal">
                     <button onclick="fecharModalCadastro()" class="fechar">x</button>
-                    <h3>Manutenção</h3>
+                    <h3>Cadastrar Manutenção</h3>
                     <div class="formulario-cadastro">
                         <form action="">
                             <input required class="inpDescricao" placeholder="Descrição" type="text">
-                            <input required class="inpValor" placeholder="Valor" type="text">
-                            <input required class="inpIdVeiculo" placeholder="Id_veiculo" type="text">
+                            <input required class="inpValor" placeholder="Valor" type="number">
+                            <input required class="placaManutencao" placeholder="Placa" type="text">
                         </form>
                         <button onclick="cadastrarManutencao()" class="btn">✓</button>
+                        <div id="error-message" style="display: none;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-container atualizar">
+                <div class="modal">
+                    <button onclick="fecharModalAtualizacao()" class="fechar">x</button>
+                    <h3>Atualizar Manutenção</h3>
+                    <div class="formulario-cadastro">
+                        <form action="">
+                            <input required class="atualizarDescricao" placeholder="Descrição" type="text">
+                            <input required class="atualizarValor" placeholder="Valor" type="text">
+                            <input required class="atualizarFimManutencao model" placeholder="fim" type="text">
+                        </form>
+                        <button onclick="AtualizarManutencao()" >atualizar</button>
+                        <button onclick="finalizarManutencao()">finalizar manutenção</button>
+                        <div id="error-message" style="display: none;"></div>
                     </div>
                 </div>
             </div>

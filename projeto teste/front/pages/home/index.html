@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="https://agrotekplus.com/images/Pic%2026.png" type="image/x-icon">
     <link rel="stylesheet" href="../../src/style/global.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Home</title>
 </head>
 
@@ -126,6 +127,14 @@
                     </table>
                 </div>
             </div>
+            <div class="graficos">
+                <div class="grafico-dispo-motorista">
+                    	<canvas id="chart-motoristas"></canvas>
+                </div>
+                <div class="grafico-dispo-frota">
+                    	<canvas id="chart-frota"></canvas>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -188,5 +197,4 @@
     </div>
 </body>
 <script src="script.js"></script>
-
 </html>

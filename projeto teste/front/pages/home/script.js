@@ -76,12 +76,14 @@ function listarDispo() {
 
                 lista.querySelector('.nome_motorista').innerHTML = e.nome
                 lista.querySelector('.cpf_motorista').innerHTML = e.cpf
-                if (e.Servico.length > 0) {
+                if (e.ocupado == true) {
                     lista.querySelector('.situacao_motorista').innerHTML = 'em serviço'
-                } else if (e.Servico.length == 0) {
+                } else if (e.ocupado == false) {
                     lista.querySelector('.situacao_motorista').innerHTML = 'disponivel'
                 }
                 tableMoto.appendChild(lista);
+
+
             })
         })
 }
@@ -112,6 +114,34 @@ function listarFrota() {
                 tableVeiculo.appendChild(lista)
             })
         })
+
+
+    const disponibilidadeFrota = 90;
+    // Gráfico de Disponibilidade de Frota
+    var ctx = document.getElementById('chart-frota').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Disponibilidade de Frota'],
+            datasets: [{
+                label: 'Disponibilidade de Frota',
+                data: [disponibilidadeFrota],
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
 }
 
 const tableManutencao = document.querySelector('.relatorio-manu')
@@ -137,7 +167,6 @@ function listarRelatorioManutencao() {
                 let dataFormatada2 = data2.toLocaleDateString("pt-BR", {
                     timeZone: "UTC",
                 });
-                console.log(e)
 
                 lista.querySelector('.placa').innerHTML = e.placa
                 lista.querySelector('.descicao_manutenca').innerHTML = e.descricao
@@ -190,7 +219,75 @@ function relatorioAlocacao() {
         })
 }
 
+
+const sair = document.querySelector('.btn-sair')
+
+sair.addEventListener('click', function () {
+    localStorage.clear();
+    window.location.href = "../login/login.html"
+})
+
+
+// graficos
+
+function graficoDisponibilidadeMotorista() {
+
+    const options = { method: 'GET' };
+
+    fetch('http://localhost:3000/readMotorista', options)
+        .then(response => {
+            console.log(response)
+            return response.json()
+        })
+        .then(res => {
+
+            res.forEach((e) => {
+                console.log()
+                if (e.ocupado == true) {
+                    console.log(e.ocupado)
+                }
+
+                if (e.ocupado == false) {
+                    console.log(e.ocupado)
+                }
+
+            })
+
+            const disponibilidadeMotoristas = 5;
+
+            var ctx = document.getElementById('chart-motoristas').getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Disponibilidade de Motoristas'],
+                    datasets: [{
+                        label: 'Disponibilidade de Motoristas',
+                        data: [disponibilidadeMotoristas],
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        })
+
+
+
+}
+
+// Dados de exemplo
+
 function carregar() {
+    graficoDisponibilidadeMotorista()
     relatorioAlocacao()
     listarRelatorioManutencao()
     listarDispo()
