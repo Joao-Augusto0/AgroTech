@@ -206,3 +206,29 @@ h3 {
     align-items: center;
     justify-content: center;
 }
+
+.graficos_2 {
+    display: flex;
+    height: 49%;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+.graficoPizzaManutencao {
+    height: 100%;
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: #CAF0F8; */
+}
+
+.graficoLinhaManutencao {
+    height: 100%;
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: #48CAE4; */
+}

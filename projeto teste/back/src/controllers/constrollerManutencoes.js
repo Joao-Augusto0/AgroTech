@@ -8,8 +8,6 @@ const prisma = new PrismaClient()
 
 const create = async (req, res) => {
 
-    console.log()
-
     if (req.body.descricao.length > 0 && req.body.valor != '' && req.body.placa.length > 0) {
 
         try {
@@ -37,10 +35,8 @@ const create = async (req, res) => {
                         if (veiculo.Servico[0] != undefined) {
                             Operacao.updateServico(veiculo)
                         }
-                        
-                        Motorista.updateDisponivel(veiculo.Servico[0].cpf   )
-                        Veiculo.updateIndisponivel(req.body.placa)
-
+                        Veiculo.updateIndisponivel(veiculo.placa)
+                        Motorista.updateDisponivel(veiculo.Servico[0].cpf)
 
                         res.status(201).json(manutencao).end()
                     } catch (error) {

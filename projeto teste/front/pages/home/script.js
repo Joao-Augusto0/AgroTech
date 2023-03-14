@@ -69,6 +69,8 @@ function listarDispo() {
     fetch('http://localhost:3000/readMotorista', options)
         .then(response => response.json())
         .then(resp => {
+
+
             resp.forEach((e) => {
 
                 var lista = linhaMoto.cloneNode(true)
@@ -114,34 +116,6 @@ function listarFrota() {
                 tableVeiculo.appendChild(lista)
             })
         })
-
-
-    const disponibilidadeFrota = 90;
-    // Gráfico de Disponibilidade de Frota
-    var ctx = document.getElementById('chart-frota').getContext('2d');
-    var chart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: ['Disponibilidade de Frota'],
-            datasets: [{
-                label: 'Disponibilidade de Frota',
-                data: [disponibilidadeFrota],
-                backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
-
 }
 
 const tableManutencao = document.querySelector('.relatorio-manu')
@@ -236,35 +210,33 @@ function graficoDisponibilidadeMotorista() {
 
     fetch('http://localhost:3000/readMotorista', options)
         .then(response => {
-            console.log(response)
             return response.json()
         })
         .then(res => {
-
+            let disponivelMotoristas = 0;
+            let indisponivelMotoristas = 0;
             res.forEach((e) => {
                 console.log()
                 if (e.ocupado == true) {
-                    console.log(e.ocupado)
+                    indisponivelMotoristas++
                 }
 
                 if (e.ocupado == false) {
-                    console.log(e.ocupado)
+                    disponivelMotoristas++
                 }
 
             })
-
-            const disponibilidadeMotoristas = 5;
 
             var ctx = document.getElementById('chart-motoristas').getContext('2d');
             var chart = new Chart(ctx, {
                 type: 'pie',
                 data: {
-                    labels: ['Disponibilidade de Motoristas'],
+                    labels: ['Motoristas Disponivel', 'Motoristas Indisponivel'],
                     datasets: [{
-                        label: 'Disponibilidade de Motoristas',
-                        data: [disponibilidadeMotoristas],
-                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
+                        label: ['Quantidade'],
+                        data: [disponivelMotoristas, indisponivelMotoristas],
+                        backgroundColor: ['#006400', '#90ee90'],
+                        borderColor: 'rgb(000, 00,0)',
                         borderWidth: 1
                     }]
                 },
@@ -279,14 +251,152 @@ function graficoDisponibilidadeMotorista() {
                 }
             });
         })
+}
+
+function graficoDisponibilidadeFrota() {
+
+    const options = { method: 'GET' };
+
+    fetch('http://localhost:3000/readVeiculo', options)
+        .then(response => response.json())
+        .then(res => {
+            let frotaServico = 0
+            let frotaManutencao = 0
+            let frotaDisponivel = 0
+            res.forEach((e) => {
+
+                if (e.Servico.length == 1 && e.Servico[0].data_retorno == null) {
+                    frotaServico++
+                }
+                if (e.Manutencao.length == 1 && e.Manutencao[0].data_fim == null) {
+                    frotaManutencao++
+                }
+                if (e.ocupado == false) {
+                    frotaDisponivel++
+                }
+            })
+
+            var ctx = document.getElementById('chart-frota').getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Disponiveis', 'Em Manutenção', 'Em Serviço'],
+                    datasets: [{
+                        label: ['Quantidade'],
+                        data: [frotaDisponivel, frotaManutencao, frotaServico],
+                        backgroundColor: ['#0000ff', '#0066CC', '#00CCCC'],
+                        borderColor: 'rgb(000, 00,0)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+
+        })
+}
+
+
+function graficoPizzaManutencao() {
+    const options = { method: 'GET' };
+
+    fetch('http://localhost:3000/readManutencao', options)
+        .then(response => response.json())
+        .then(res => {
+            console.log(res)
+        })
+
+    var ctx = document.getElementById('pizzaManutencao').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['01/01/2023', '02/01/2023', '03/01/2023', '04/01/2023', '05/01/2023'],
+            datasets: [{
+                label: 'Custo Diário de Manutenção',
+                data: [120, 80, 110, 90, 100],
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: 'Tabela de Manutenção'
+            },
+            legend: {
+                display: true,
+                position: 'top'
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
 
 
 
 }
 
-// Dados de exemplo
+
+function graficoLinhaManutencao() {
+
+    var ctx = document.getElementById('linhaManutencao').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['01/01/2023', '02/01/2023', '03/01/2023', '04/01/2023', '05/01/2023'],
+            datasets: [{
+                label: 'Custo Diário de Manutenção',
+                data: [120, 80, 110, 90, 100],
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }, {
+                label: 'Total',
+                data: [500],
+                backgroundColor: 'rgba(51, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: 'Tabela de Manutenção'
+            },
+            legend: {
+                display: true,
+                position: 'top'
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+}
 
 function carregar() {
+    graficoLinhaManutencao()
+    graficoPizzaManutencao()
+    graficoDisponibilidadeFrota()
     graficoDisponibilidadeMotorista()
     relatorioAlocacao()
     listarRelatorioManutencao()
@@ -294,7 +404,6 @@ function carregar() {
     listarFrota()
     user()
 }
-
 
 carregar()
 

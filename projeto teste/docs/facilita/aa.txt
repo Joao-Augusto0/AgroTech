@@ -1,4 +1,4 @@
-INSERT INTO motorista (nome, cpf, cnh) VALUES 
+﻿INSERT INTO motorista (nome, cpf, cnh) VALUES 
 ('João da Silva', '12345678901', 111111),
 ('Maria dos Santos', '23456789012', 222222),
 ('José da Silva', '34567890123', 333333),
@@ -34,3 +34,12 @@ VALUES
     ('Sandero', 'KLM-9012', 'Renault', 'Visita'),
     ('Saveiro', 'PQR-3456', 'Volkswagen', 'Carga'),
     ('HR-V', 'STU-7890', 'Honda', 'Vendas');
+
+
+
+
+faça um exemplo de tabela de coluna em chart js que tenha 2
+valores as datas das manutenções e quanto gastou 
+por dia faça para mostrar o total do dia caso 
+tenha varias manutenções em um dia e o total de 
+todos os dias
