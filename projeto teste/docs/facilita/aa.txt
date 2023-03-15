@@ -5,7 +5,7 @@ DELIMITER //
 CREATE PROCEDURE insere_dados_motorista()
 BEGIN
   DECLARE contador INT DEFAULT 0;
-  WHILE contador < 100 DO
+  WHILE contador < 75 DO
     SET @nome := CONCAT('Motorista ', contador);
     SET @cpf := FLOOR(RAND() * 99999999999);
     SET @cnh := FLOOR(RAND() * 999999999);
@@ -32,7 +32,7 @@ DELIMITER $$
 CREATE PROCEDURE inserir_frota()
 BEGIN
   DECLARE i INT DEFAULT 1;
-  WHILE (i <= 100) DO
+  WHILE (i <= 50) DO
     INSERT INTO frota (modelo, placa, marca, tipo)
     VALUES (
       CONCAT('Modelo ', FLOOR(RAND() * 100)),

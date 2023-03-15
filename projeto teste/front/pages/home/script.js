@@ -21,7 +21,6 @@ function user() {
         link.forEach((e) => {
             e.href = '#'
         })
-
     }
 }
 
@@ -36,7 +35,6 @@ function iniciaModal(id) {
     })
 }
 
-
 const dispo = document.querySelector('.dispo')
 const manu = document.querySelector('.manutencao')
 const aloca = document.querySelector('.alocacao')
@@ -45,16 +43,13 @@ dispo.addEventListener('click', function () {
     iniciaModal('modal-relatorio disponibilidade')
 })
 
-
 manu.addEventListener('click', function () {
     iniciaModal('modal-relatorio manuten')
 })
 
-
 aloca.addEventListener('click', function () {
     iniciaModal('modal-relatorio aloca')
 })
-
 
 const tableMoto = document.querySelector('.table-motorista')
 const linhaMoto = document.querySelector('.itens-moto')
@@ -80,8 +75,6 @@ function listarDispo() {
                     lista.querySelector('.situacao_motorista').innerHTML = 'disponivel'
                 }
                 tableMoto.appendChild(lista);
-
-
             })
         })
 }
@@ -109,7 +102,7 @@ function listarFrota() {
                     i++
                 }
 
-                console.log()
+
                 if (e.ocupado == false) {
                     lista.querySelector('.situacao_veiculo').innerHTML = 'disponivel'
                 } else if (e.Manutencao.length == 1 && e.Manutencao[0].data_fim == null) {
@@ -190,7 +183,6 @@ function relatorioAlocacao() {
                 } else if (e.Manutencao.length == 1) {
                     lista.querySelector('.manutencao_vei').innerHTML = 'em manutenção'
                     lista.querySelector('.servico_vei').innerHTML = 'quebrou no meio do serviço'
-
                 }
                 tableAloca.appendChild(lista)
             })
@@ -216,7 +208,7 @@ function graficoDisponibilidadeMotorista() {
             let disponivelMotoristas = 0;
             let indisponivelMotoristas = 0;
             res.forEach((e) => {
-                console.log()
+
                 if (e.ocupado == true) {
                     indisponivelMotoristas++
                 }
@@ -229,13 +221,13 @@ function graficoDisponibilidadeMotorista() {
 
             var ctx = document.getElementById('chart-motoristas').getContext('2d');
             var chart = new Chart(ctx, {
-                type: 'pie',
+                type: 'doughnut',
                 data: {
                     labels: ['Motoristas Disponivel', 'Motoristas Indisponivel'],
                     datasets: [{
                         label: ['Quantidade'],
                         data: [disponivelMotoristas, indisponivelMotoristas],
-                        backgroundColor: ['#006400', '#90ee90'],
+                        backgroundColor: ['#00B4D8', '#CAF0F8'],
                         borderColor: 'rgb(000, 00,0)',
                         borderWidth: 1
                     }]
@@ -278,13 +270,13 @@ function graficoDisponibilidadeFrota() {
 
             var ctx = document.getElementById('chart-frota').getContext('2d');
             var chart = new Chart(ctx, {
-                type: 'pie',
+                type: 'doughnut',
                 data: {
                     labels: ['Disponiveis', 'Em Manutenção', 'Em Serviço'],
                     datasets: [{
                         label: ['Quantidade'],
                         data: [frotaDisponivel, frotaManutencao, frotaServico],
-                        backgroundColor: ['#0000ff', '#0066CC', '#00CCCC'],
+                        backgroundColor: ['#48CAE4', '#ADE8F4', '#00CCCC'],
                         borderColor: 'rgb(000, 00,0)',
                         borderWidth: 1
                     }]
@@ -386,7 +378,6 @@ function graficoLinhaManutencao() {
                     tipoCarga++
                     valorCarga += e.valor
                 }
-
             })
 
             total = total += (valorVisita + valorVendas + valorCarga)
@@ -435,7 +426,6 @@ function graficoLinhaManutencao() {
 
 function graficoColunaAlocacao() {
 
-
     const options = { method: 'GET' };
 
     fetch(urlVeiculo, options)
@@ -447,7 +437,6 @@ function graficoColunaAlocacao() {
             let manutencao = 0
 
             res.forEach((e) => {
-                console.log(e.ocupado == false)
 
                 if (e.ocupado == false) {
                     ocioso++
@@ -474,6 +463,7 @@ function graficoColunaAlocacao() {
                     }]
                 },
                 options: {
+                    responsive: true,
                     scales: {
                         y: {
                             beginAtZero: true
@@ -483,16 +473,139 @@ function graficoColunaAlocacao() {
             });
 
         })
+}
+
+function dashboard_1() {
+
+    const options = { method: 'GET' };
+
+    fetch(urlVeiculo, options)
+        .then(response => response.json())
+        .then(res => {
+            let visita = 0
+            let carga = 0
+            let vendas = 0
+            res.forEach((e) => {
+                if (e.tipo == 'Visita') {
+                    visita++
+                }
+                if (e.tipo == 'Carga') {
+                    carga++
+                }
+                if (e.tipo == 'Vendas') {
+                    vendas++
+                }
+
+            })
+
+            var ctx = document.getElementById('dashboard').getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Visita', 'Carga', 'Vendas'],
+                    datasets: [{
+                        data: [visita, carga, vendas],
+                        backgroundColor: ['#36A2EB', '#FFCE56', '#FF6384']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            });
+        })
+}
+
+function dashboard_2() {
+
+    // const options = { method: 'GET' };
+
+    // fetch('http://localhost:3000/readVeiculo', options)
+    //     .then(response => response.json())
+    //     .then(res => {
+    //         let visita = 0
+    //         let carga = 0  
+    //         let vendas= 0
+
+    //         res.forEach((e)=>{
+    //             // if(e.Servico.length == 1 && e.Servico[0].data_retorno == null){
+
+    //             // }
+    //             console.log(e.tipo)
+
+    //         })
+    //     })
+
+    const options = { method: 'GET' };
+
+    fetch('http://localhost:3000/readOperacao', options)
+        .then(response => response.json())
+        .then(res => {
+
+            let visita = 0
+            let carga = 0
+            let vendas = 0
+
+
+            res.forEach((e) => {
+
+                if (e.data_retorno == null && e.veiculo.tipo == 'Vendas') {
+                    vendas++
+                }
+                if (e.data_retorno == null && e.veiculo.tipo == 'Visita') {
+                    visita++
+                }
+                if (e.data_retorno == null && e.veiculo.tipo == 'Carga') {
+                    carga++
+                }
+
+            })
+
+            var ctx = document.getElementById('dashboard_1').getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Visita', 'Carga', 'Vendas'],
+                    datasets: [{
+                        label: 'Visita',
+                        data: [visita],
+                        backgroundColor: '#36A2EB'
+                    }, {
+                        label: 'Carga',
+                        data: ['', carga],
+                        backgroundColor: '#FFCE56'
+                    }, {
+                        label: 'Vendas',
+                        data: ['', '', vendas],
+                        backgroundColor: '#FF6384'
+                    }]
+                },
+                options: {
+                    scales: {
+                        xAxes: [{
+                            stacked: true
+                        }],
+                        yAxes: [{
+                            stacked: true
+                        }]
+                    }
+                }
+            });
+
+        })
+
+
 
 
 }
 
 
 
-
-
-
 function carregar() {
+    dashboard_1()
+    dashboard_2()
     graficoColunaAlocacao()
     graficoLinhaManutencao()
     graficoPizzaManutencao()
