@@ -1,6 +1,6 @@
-// pegar informações do usuario
-
 const urlVeiculo = 'http://localhost:3000/readVeiculo'
+const urlMotorista = 'http://localhost:3000/readMotorista'
+const urlManutencao = 'http://localhost:3000/readManutencao'
 
 function user() {
     let usuario = JSON.parse(localStorage.getItem("user"));
@@ -25,14 +25,10 @@ function user() {
     }
 }
 
-
-// mostrar modal dos relatorios
-
 function iniciaModal(id) {
     const modal = document.getElementById(id)
     modal.classList.add('mostrar')
 
-    // remover classe que faz aparecer modal
     modal.addEventListener('click', (e) => {
         if (e.target.id == id || e.target.className == 'fechar') {
             modal.classList.remove('mostrar')
@@ -66,7 +62,7 @@ const linhaMoto = document.querySelector('.itens-moto')
 function listarDispo() {
     const options = { method: 'GET' };
 
-    fetch('http://localhost:3000/readMotorista', options)
+    fetch(urlMotorista, options)
         .then(response => response.json())
         .then(resp => {
 
@@ -106,11 +102,19 @@ function listarFrota() {
 
                 lista.querySelector('.placa_veiculo').innerHTML = e.placa
                 lista.querySelector('.tipo_veiculo').innerHTML = e.tipo
-                if (e.Servico.length > 1 && e.Manutencao.length > 1) {
+
+                //
+                let i = 0
+                if (e.ocupado == true) {
+                    i++
+                }
+
+                console.log()
+                if (e.ocupado == false) {
                     lista.querySelector('.situacao_veiculo').innerHTML = 'disponivel'
-                } else if (e.Manutencao.length == 1) {
+                } else if (e.Manutencao.length == 1 && e.Manutencao[0].data_fim == null) {
                     lista.querySelector('.situacao_veiculo').innerHTML = 'em manutenção'
-                } else {
+                } else if (e.Servico.length == 1 && e.Servico[0].data_retorno == null) {
                     lista.querySelector('.situacao_veiculo').innerHTML = 'em serviço'
                 }
                 tableVeiculo.appendChild(lista)
@@ -124,7 +128,7 @@ const itensVeiculoManutencao = document.querySelector('.itens_veiculo_manutencao
 function listarRelatorioManutencao() {
     const options = { method: 'GET' };
 
-    fetch('http://localhost:3000/readManutencao', options)
+    fetch(urlManutencao, options)
         .then(response => response.json())
         .then(res => {
             res.forEach((e) => {
@@ -193,7 +197,6 @@ function relatorioAlocacao() {
         })
 }
 
-
 const sair = document.querySelector('.btn-sair')
 
 sair.addEventListener('click', function () {
@@ -201,14 +204,11 @@ sair.addEventListener('click', function () {
     window.location.href = "../login/login.html"
 })
 
-
-// graficos
-
 function graficoDisponibilidadeMotorista() {
 
     const options = { method: 'GET' };
 
-    fetch('http://localhost:3000/readMotorista', options)
+    fetch(urlMotorista, options)
         .then(response => {
             return response.json()
         })
@@ -257,7 +257,7 @@ function graficoDisponibilidadeFrota() {
 
     const options = { method: 'GET' };
 
-    fetch('http://localhost:3000/readVeiculo', options)
+    fetch(urlVeiculo, options)
         .then(response => response.json())
         .then(res => {
             let frotaServico = 0
@@ -303,97 +303,197 @@ function graficoDisponibilidadeFrota() {
         })
 }
 
-
 function graficoPizzaManutencao() {
+    const options = { method: 'GET' };
+
+    fetch(urlManutencao, options)
+        .then(response => response.json())
+        .then(res => {
+
+            let emManutencao = 0
+            let manutencaoFinalizada = 0
+
+            res.forEach((e) => {
+
+                let data1 = new Date(e.data_inicio);
+
+                dataFormat = data1.toLocaleDateString("pt-BR", {
+                    timeZone: "UTC",
+                });
+
+                if (e.data_fim == null) {
+                    emManutencao++
+                } else {
+                    manutencaoFinalizada++
+                }
+            })
+
+            var ctx = document.getElementById('pizzaManutencao').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Quantidade de veiculos'],
+                    datasets: [{
+                        label: 'Em manutenção',
+                        data: [emManutencao],
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }, {
+                        label: 'Manutenção Finalizada',
+                        data: [manutencaoFinalizada],
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        })
+}
+
+function graficoLinhaManutencao() {
+
     const options = { method: 'GET' };
 
     fetch('http://localhost:3000/readManutencao', options)
         .then(response => response.json())
         .then(res => {
-            console.log(res)
+            let tipoVisita = 0
+            let tipoVendas = 0
+            let tipoCarga = 0
+            let valorVisita = 0
+            let valorVendas = 0
+            let valorCarga = 0
+            let total = 0
+            res.forEach((e) => {
+
+                if (e.veiculo.tipo == 'Visita') {
+                    tipoVisita++
+                    valorVisita += e.valor
+                }
+                if (e.veiculo.tipo == 'Vendas') {
+                    tipoVendas++
+                    valorVendas += e.valor
+                }
+                if (e.veiculo.tipo == 'Carga') {
+                    tipoCarga++
+                    valorCarga += e.valor
+                }
+
+            })
+
+            total = total += (valorVisita + valorVendas + valorCarga)
+
+            var ctx = document.getElementById('linhaManutencao').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Visita', 'Vendas', 'Carga', 'total'],
+                    datasets: [{
+                        label: 'quantidade de veiculo',
+                        data: [tipoVisita, tipoVendas, tipoCarga],
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1,
+
+                    }, {
+                        label: 'Preço',
+                        data: [valorVisita, valorVendas, valorCarga],
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1,
+                        fill: true
+                    },
+                    {
+                        label: 'total',
+                        data: ['', '', '', total],
+                        backgroundColor: 'rgba(14, 142, 23, 0.2)',
+                        borderColor: 'rgba(14, 142, 23, 1)',
+                        borderWidth: 1,
+                        fill: true
+                    },
+                    ]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+        })
+}
+
+function graficoColunaAlocacao() {
+
+
+    const options = { method: 'GET' };
+
+    fetch(urlVeiculo, options)
+        .then(response => response.json())
+        .then(res => {
+
+            let ocioso = 0
+            let servio = 0
+            let manutencao = 0
+
+            res.forEach((e) => {
+                console.log(e.ocupado == false)
+
+                if (e.ocupado == false) {
+                    ocioso++
+                } else if (e.Manutencao.length == 1 && e.Manutencao[0].data_fim == null) {
+                    manutencao++
+                } else if (e.Servico.length == 1 && e.Servico[0].data_retorno == null) {
+                    servio++
+                }
+
+            })
+
+            var ctx = document.getElementById('colunaAlocacao').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Manutenção', 'Serviço', 'ociosos'],
+                    datasets: [{
+                        label: 'quantidade de veiculo',
+                        data: [manutencao, servio, ocioso],
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1,
+
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
         })
 
-    var ctx = document.getElementById('pizzaManutencao').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: ['01/01/2023', '02/01/2023', '03/01/2023', '04/01/2023', '05/01/2023'],
-            datasets: [{
-                label: 'Custo Diário de Manutenção',
-                data: [120, 80, 110, 90, 100],
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            title: {
-                display: true,
-                text: 'Tabela de Manutenção'
-            },
-            legend: {
-                display: true,
-                position: 'top'
-            },
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
-
-
 
 }
 
 
-function graficoLinhaManutencao() {
 
-    var ctx = document.getElementById('linhaManutencao').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['01/01/2023', '02/01/2023', '03/01/2023', '04/01/2023', '05/01/2023'],
-            datasets: [{
-                label: 'Custo Diário de Manutenção',
-                data: [120, 80, 110, 90, 100],
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 1
-            }, {
-                label: 'Total',
-                data: [500],
-                backgroundColor: 'rgba(51, 162, 235, 0.2)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            title: {
-                display: true,
-                text: 'Tabela de Manutenção'
-            },
-            legend: {
-                display: true,
-                position: 'top'
-            },
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
-}
+
+
 
 function carregar() {
+    graficoColunaAlocacao()
     graficoLinhaManutencao()
     graficoPizzaManutencao()
     graficoDisponibilidadeFrota()

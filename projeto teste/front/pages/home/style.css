@@ -217,18 +217,34 @@ h3 {
 
 .graficoPizzaManutencao {
     height: 100%;
-    width: 40%;
+    width: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* background-color: #CAF0F8; */
 }
 
 .graficoLinhaManutencao {
     height: 100%;
-    width: 60%;
+    width: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* background-color: #48CAE4; */
+}
+
+.graficos_3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50%;
+    width: 100%;
+    bottom: 0;
+    /* position: absolute; */
+}
+
+.graficoColunaAlocacao{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
 }

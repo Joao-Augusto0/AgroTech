@@ -67,7 +67,12 @@ const read = async (req, res) => {
             valor: true,
             data_inicio: true,
             data_fim: true,
-            placa: true
+            placa: true,
+            veiculo:{
+                select:{
+                    tipo:true
+                }
+            }
         }
     })
     res.status(200).json(manutencao).end()

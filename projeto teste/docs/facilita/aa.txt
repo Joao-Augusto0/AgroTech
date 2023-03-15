@@ -1,40 +1,52 @@
-﻿INSERT INTO motorista (nome, cpf, cnh) VALUES 
-('João da Silva', '12345678901', 111111),
-('Maria dos Santos', '23456789012', 222222),
-('José da Silva', '34567890123', 333333),
-('Ana Paula Santos', '45678901234', 444444),
-('Felipe Pereira', '56789012345', 555555),
-('Luiza Rodrigues', '67890123456', 666666),
-('Antônio Oliveira', '78901234567', 777777),
-('Patrícia Souza', '89012345678', 888888),
-('Paulo Henrique', '90123456789', 999999),
-('Luciana Costa', '09876543210', 101010),
-('Bruno Alves', '98765432109', 121212),
-('Renata Silva', '87654321098', 131313),
-('Rodrigo Santos', '76543210987', 141414),
-('Carla Oliveira', '65432109876', 151515),
-('Fernando Carvalho', '54321098765', 161616)
-ON DUPLICATE KEY UPDATE cpf = cpf + 1, cnh = cnh + 1;
+﻿GERADOR DE MOTORISTA
 
+DELIMITER //
 
-INSERT INTO frota (modelo, placa, marca, tipo)
-VALUES 
-    ('Fiesta', 'ABC-1234', 'Ford', 'Visita'),
-    ('Civic', 'DEF-5678', 'Honda', 'Carga'),
-    ('Gol', 'GHI-9012', 'Volkswagen', 'Vendas'),
-    ('Celta', 'JKL-3456', 'Chevrolet', 'Visita'),
-    ('Focus', 'MNO-7890', 'Ford', 'Carga'),
-    ('Corolla', 'PQR-1234', 'Toyota', 'Vendas'),
-    ('Uno', 'STU-5678', 'Fiat', 'Visita'),
-    ('Onix', 'VWX-9012', 'Chevrolet', 'Carga'),
-    ('Amarok', 'YZA-3456', 'Volkswagen', 'Vendas'),
-    ('HB20', 'BCD-7890', 'Hyundai', 'Visita'),
-    ('Logan', 'EFG-1234', 'Renault', 'Carga'),
-    ('Tucson', 'HIJ-5678', 'Hyundai', 'Vendas'),
-    ('Sandero', 'KLM-9012', 'Renault', 'Visita'),
-    ('Saveiro', 'PQR-3456', 'Volkswagen', 'Carga'),
-    ('HR-V', 'STU-7890', 'Honda', 'Vendas');
+CREATE PROCEDURE insere_dados_motorista()
+BEGIN
+  DECLARE contador INT DEFAULT 0;
+  WHILE contador < 100 DO
+    SET @nome := CONCAT('Motorista ', contador);
+    SET @cpf := FLOOR(RAND() * 99999999999);
+    SET @cnh := FLOOR(RAND() * 999999999);
+    INSERT INTO motorista (nome, cpf, cnh)
+    SELECT @nome, @cpf, @cnh
+    FROM DUAL
+    WHERE NOT EXISTS (
+      SELECT * FROM motorista
+      WHERE cpf = @cpf OR cnh = @cnh
+    )
+    LIMIT 1;
+    SET contador := contador + 1;
+  END WHILE;
+END //
 
+DELIMITER ;
+
+CALL insere_dados_motorista();
+
+GERADOR DE FROTAS
+
+-- Criar o procedimento armazenado
+DELIMITER $$
+CREATE PROCEDURE inserir_frota()
+BEGIN
+  DECLARE i INT DEFAULT 1;
+  WHILE (i <= 100) DO
+    INSERT INTO frota (modelo, placa, marca, tipo)
+    VALUES (
+      CONCAT('Modelo ', FLOOR(RAND() * 100)),
+      CONCAT(UPPER(LEFT(CHAR(FLOOR(RAND() * 26) + 65), 3)), '-', FLOOR(RAND() * 10000)),
+      CONCAT('Marca ', FLOOR(RAND() * 10)),
+      ELT(FLOOR(RAND() * 3) + 1, 'Visita', 'Carga', 'Vendas')
+    );
+    SET i = i + 1;
+  END WHILE;
+END$$
+DELIMITER ;
+
+-- Chamar o procedimento armazenado para inserir os dados
+CALL inserir_frota();
 
 
 
