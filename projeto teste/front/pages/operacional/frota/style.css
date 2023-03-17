@@ -152,11 +152,31 @@ h3{
     margin-top: 5%;
 }
 
-/* .mdbtn{
-    height: 45px;
-    width: 150px;
-    position: absolute;
-} */
+.btnCadastrar{
+    height: 50px;
+    width: 50px;
+    margin-top: 40px;
+    border-radius: 100%;
+}
+
+.btnCadastrar:hover{
+   background-color: #00B4D8;
+   cursor: pointer;
+}
+
+.btnAtualizar {
+    height: 50px;
+    width: 50px;
+    margin-top: 40px;
+    border-radius: 100%;
+}
+
+.btnAtualizar:hover{
+    background-color: #00B4D8;
+    cursor: pointer;
+ }
+ 
+
 
 #error-message {
     color: red;

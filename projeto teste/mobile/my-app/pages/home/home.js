@@ -10,7 +10,7 @@ export default function Home({ navigation }) {
     var manu = ''
 
     useEffect(() => {
-        fetch("http://192.168.0.4:3000/readVeiculo")
+        fetch("http://10.87.207.14:3000/readVeiculo")
             .then(res => { return res.json() })
             .then(data => {
                 setDisponibilidade(data)
@@ -18,7 +18,7 @@ export default function Home({ navigation }) {
     })
 
     useEffect(() => {
-        fetch("http://192.168.0.4:3000/readManutencao")
+        fetch("http://10.87.207.14:3000/readManutencao")
             .then(res => { return res.json() })
             .then(data => {
                 setManutencao(data)
@@ -26,14 +26,9 @@ export default function Home({ navigation }) {
     })
 
     Disponibilidade.map((e) => {
-        if (e.ocupado == false) {
-            dispo = 'disponivel'
-        } else if (e.ocupado == true) {
-            dispo = 'indisponivel'
-        }
+
 
         Manutencao.map((e) => {
-            console.log(e)
             if (e.data_fim == null) {
                 manu = 'em manutenção'
             }
@@ -45,17 +40,18 @@ export default function Home({ navigation }) {
         <View style={styles.container}>
             <Text style={styles.titulo}>Relatórios</Text>
             <View>
-                <Text style={styles.subtitulo}>Disponibilidade</Text>
+                <Text style={styles.subtitulo}>Disponivel</Text>
                 <ScrollView style={styles.scroll1}>
                     {
                         Disponibilidade.map((e, index) => {
-                            return (
-                                <View style={styles.infoDispo}>
-                                    <Text style={styles.texto}>{e.placa}</Text>
-                                    <Text style={styles.texto}>{e.tipo}</Text>
-                                    <Text style={styles.texto}>{dispo}</Text>
-                                </View>
-                            )
+                            if (e.ocupado === false) {
+                                return (
+                                    <View style={styles.infoDispo}>
+                                        <Text style={styles.texto}>{e.placa}</Text>
+                                        <Text style={styles.texto}>{e.tipo}</Text>
+                                    </View>
+                                )
+                            }
                         })
                     }
 
@@ -107,7 +103,7 @@ const styles = StyleSheet.create({
     infoDispo: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-around'
     },
     titulo: {
         fontSize: 30,

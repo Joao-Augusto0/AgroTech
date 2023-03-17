@@ -4,8 +4,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function App({ navigation }) {
 
-    const [email, setEmail] = useState('malaca@gmail.com')
-    const [senha, setSenha] = useState('123')
+    const [email, setEmail] = useState('')
+    const [senha, setSenha] = useState('')
 
     let dados = {
         email: email,
@@ -13,7 +13,7 @@ export default function App({ navigation }) {
     }
 
     const userLogin = () => {
-        fetch("http://192.168.0.4:3000/loginUser"
+        fetch("http://10.87.207.14:3000/loginUser"
             , {
                 method: 'POST',
                 headers: {

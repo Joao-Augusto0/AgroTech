@@ -10,10 +10,6 @@ function user() {
     document.getElementById("roleUser").innerHTML = usuario.role
 }
 
-
-
-// listar por filtro com os dados do motorista
-
 function listarFrota() {
     const options = { method: 'GET' };
 
@@ -118,6 +114,8 @@ function fecharModalAtualizar() {
 }
 
 function atualizarFrota() {
+    let usuario = JSON.parse(localStorage.getItem("user"));
+
     let frota = JSON.parse(localStorage.getItem("Frota"));
     console.log(frota)
 
@@ -148,7 +146,10 @@ function atualizarFrota() {
 
     const options = {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json',
+            authorization: usuario.token
+        },
         body: JSON.stringify(dados)
     };
 
@@ -170,22 +171,16 @@ function atualizarFrota() {
 
 
 function filterTable() {
-    // Captura o valor do input de busca
     let busca, filter, table, tr, td, i, txtValue;
 
     busca = document.querySelector('.filtro')
     filter = busca.value.toUpperCase();
 
-    // Captura a tabela e as linhas
     table = document.querySelector('.table-frota')
     tr = table.getElementsByTagName("tr");
 
-
-    // Loop através de todas as linhas da tabela e esconde as que não correspondem ao filtro
     for (i = 0; i < tr.length; i++) {
-        // Captura as células da linha
         td = tr[i].getElementsByTagName("td");
-        // Loop através de todas as células e verifica se o valor corresponde ao filtro
         for (j = 0; j < td.length; j++) {
             txtValue = td[j].textContent || td[j].innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -205,9 +200,9 @@ sair.addEventListener('click', function () {
     window.location.href = "../../login/login.html"
 })
 
-function carregar(){
+function carregar() {
     listarFrota()
-    user() 
+    user()
 }
 
 carregar()

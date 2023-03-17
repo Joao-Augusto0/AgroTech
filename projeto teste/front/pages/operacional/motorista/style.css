@@ -148,25 +148,30 @@ h3 {
     margin-top: 5%;
 }
 
-.btnCadastrar{
+.btnCadastrar {
     height: 50px;
     width: 50px;
     margin-top: 40px;
     border-radius: 100%;
 }
 
-.btnCadastrar:hover{
-   background-color: #00B4D8;
-   cursor: pointer;
+.btnCadastrar:hover {
+    background-color: #00B4D8;
+    cursor: pointer;
 }
 
 .btnAtualizar {
-    height: 45px;
-    width: 150px;
+    height: 50px;
+    width: 50px;
     margin-top: 40px;
-    position: absolute;
-
+    border-radius: 100%;
 }
+
+.btnAtualizar:hover {
+    background-color: #00B4D8;
+    cursor: pointer;
+}
+
 
 #error-message {
     color: red;

@@ -217,22 +217,16 @@ function finalizarManutencao() {
 }
 
 function filterTable() {
-    // Captura o valor do input de busca
     let busca, filter, table, tr, td, i, txtValue;
 
     busca = document.querySelector('.filtro')
     filter = busca.value.toUpperCase();
 
-    // Captura a tabela e as linhas
     table = document.querySelector('.table-manutencao')
     tr = table.getElementsByTagName("tr");
 
-
-    // Loop através de todas as linhas da tabela e esconde as que não correspondem ao filtro
     for (i = 0; i < tr.length; i++) {
-        // Captura as células da linha
         td = tr[i].getElementsByTagName("td");
-        // Loop através de todas as células e verifica se o valor corresponde ao filtro
         for (j = 0; j < td.length; j++) {
             txtValue = td[j].textContent || td[j].innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -244,7 +238,6 @@ function filterTable() {
         }
     }
 }
-
 
 const sair = document.querySelector('.btn-sair')
 

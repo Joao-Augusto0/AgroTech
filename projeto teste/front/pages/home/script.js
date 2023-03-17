@@ -216,7 +216,6 @@ function graficoDisponibilidadeMotorista() {
                 if (e.ocupado == false) {
                     disponivelMotoristas++
                 }
-
             })
 
             var ctx = document.getElementById('chart-motoristas').getContext('2d');
@@ -520,24 +519,6 @@ function dashboard_1() {
 
 function dashboard_2() {
 
-    // const options = { method: 'GET' };
-
-    // fetch('http://localhost:3000/readVeiculo', options)
-    //     .then(response => response.json())
-    //     .then(res => {
-    //         let visita = 0
-    //         let carga = 0  
-    //         let vendas= 0
-
-    //         res.forEach((e)=>{
-    //             // if(e.Servico.length == 1 && e.Servico[0].data_retorno == null){
-
-    //             // }
-    //             console.log(e.tipo)
-
-    //         })
-    //     })
-
     const options = { method: 'GET' };
 
     fetch('http://localhost:3000/readOperacao', options)
@@ -569,15 +550,15 @@ function dashboard_2() {
                 data: {
                     labels: ['Visita', 'Carga', 'Vendas'],
                     datasets: [{
-                        label: 'Visita',
+                        label: 'Em Operação',
                         data: [visita],
                         backgroundColor: '#36A2EB'
                     }, {
-                        label: 'Carga',
+                        label: 'Em Operação',
                         data: ['', carga],
                         backgroundColor: '#FFCE56'
                     }, {
-                        label: 'Vendas',
+                        label: 'Em Operação',
                         data: ['', '', vendas],
                         backgroundColor: '#FF6384'
                     }]
@@ -595,16 +576,10 @@ function dashboard_2() {
             });
 
         })
-
-
-
-
 }
 
-
-
 function carregar() {
-    dashboard_1()
+
     dashboard_2()
     graficoColunaAlocacao()
     graficoLinhaManutencao()
@@ -615,8 +590,8 @@ function carregar() {
     listarRelatorioManutencao()
     listarDispo()
     listarFrota()
+    dashboard_1()
     user()
 }
 
 carregar()
-
