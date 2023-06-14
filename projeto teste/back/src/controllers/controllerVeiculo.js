@@ -71,9 +71,9 @@ const update = async (req, res) => {
             },
             data: req.body
         })
-        res.status(200).send({menssagem:'veiculo atualizado com sucesso'}).end()
+        res.status(200).send({ menssagem: 'veiculo atualizado com sucesso' }).end()
     } catch (error) {
-        res.status(400).send({error})
+        res.status(400).send({ error })
     }
 }
 

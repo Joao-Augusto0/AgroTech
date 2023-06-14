@@ -14,7 +14,6 @@ const autenticacao = (req, res, next) => {
             }
         }
     })
-
 }
 
 module.exports = {

@@ -88,7 +88,7 @@ const read = async (req, res) => {
             veiculo: {
                 select: {
                     placa: true,
-                    tipo:true,
+                    tipo: true,
                     Manutencao: {
                         select: {
                             descricao: true

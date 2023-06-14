@@ -6,8 +6,6 @@ const { PrismaClient } = require('@prisma/client')
 
 const prisma = new PrismaClient()
 
-// criação de usuario para teste
-
 const create = async (req, res) => {
     var info = req.body
 
@@ -21,7 +19,6 @@ const create = async (req, res) => {
     res.status(201).json(user).end()
 }
 
-// listar usuarios
 const read = async (req, res) => {
     let user = await prisma.usuario.findMany({
         select: {
@@ -31,8 +28,6 @@ const read = async (req, res) => {
     })
     res.status(201).json(user).end()
 }
-
-// login de usuario
 
 const login = async (req, res) => {
 
@@ -58,16 +53,13 @@ const login = async (req, res) => {
                     res.status(404).json(err).end()
                 }
             })
-        }else{
+        } else {
             res.status(404).json({ "result": "senha incorreta" }).end()
         }
     } else {
         res.status(404).json({ "result": "usuario não encontrado" }).end()
     }
 }
-
-
-
 
 module.exports = {
     create,
